@@ -24,10 +24,11 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioClip coinSound;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject gameOverText;
+    [SerializeField] private GameObject winPanel; 
 
     [Header("Health & Trap Settings")]
     [SerializeField] private int maxHealth = 5;
-    [SerializeField] private Transform healthContainer; // Ô kéo thả thanh tim vào đây
+    [SerializeField] private Transform healthContainer;
     [SerializeField] private float iframeDuration = 1.2f;
     private int currentHealth;
     private float iframeTimer;
@@ -64,10 +65,9 @@ public class Player : MonoBehaviour
         }
 
         currentHealth = maxHealth;
-        if (gameOverText != null)
-        {
-            gameOverText.SetActive(false);
-        }
+        if (gameOverText != null) gameOverText.SetActive(false);
+        if (winPanel != null) winPanel.SetActive(false); 
+
         UpdateHealthUI();
         UpdateScoreUI();
     }
@@ -264,7 +264,7 @@ public class Player : MonoBehaviour
         }
         horizontalInput = 0;
         rb.linearVelocity = Vector2.zero;
-        rb.bodyType = RigidbodyType2D.Static; 
+        rb.bodyType = RigidbodyType2D.Static;
         this.enabled = false;
     }
 
@@ -285,20 +285,20 @@ public class Player : MonoBehaviour
         {
             TakeDamage(1);
         }
+
         if (collision.CompareTag("Finish"))
         {
-            
-            int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+            Debug.Log("Player đã chạm đích!");
 
-            if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+            if (winPanel != null)
             {
-                SceneManager.LoadScene(nextSceneIndex);
+                winPanel.SetActive(true);
             }
-            else
-            {
-                Debug.Log("Đã phá đảo màn chơi! Tải lại màn 1.");
-                SceneManager.LoadScene(0);
-            }
+
+            horizontalInput = 0f;
+            rb.linearVelocity = Vector2.zero;
+
+            Time.timeScale = 0f;
         }
     }
 
