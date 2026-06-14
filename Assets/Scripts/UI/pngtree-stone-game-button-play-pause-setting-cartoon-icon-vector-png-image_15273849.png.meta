@@ -1,0 +1,663 @@
+fileFormatVersion: 2
+guid: 98553c5e9890e6b46b8f9e17e1067441
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7968338126594498391
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_0
+  - first:
+      213: 3622899879025972538
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_1
+  - first:
+      213: -6430089230620791524
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_2
+  - first:
+      213: -5557020148307972180
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_3
+  - first:
+      213: -2917746479019805594
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_4
+  - first:
+      213: -4401771039509444716
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_5
+  - first:
+      213: -1411071254259441749
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_6
+  - first:
+      213: -5252199988900551660
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_7
+  - first:
+      213: -66513488514032312
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_8
+  - first:
+      213: -6819538572074731301
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_9
+  - first:
+      213: 273502376597607310
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_10
+  - first:
+      213: 5813821160087381429
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_11
+  - first:
+      213: 7698351546997702180
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_12
+  - first:
+      213: -8849527809393389287
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_13
+  - first:
+      213: -1912659920657101799
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_14
+  - first:
+      213: -8202930572689435187
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_15
+  - first:
+      213: 2631239195310989015
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_16
+  - first:
+      213: -7653054946301313401
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_17
+  - first:
+      213: -4585211283562744425
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_18
+  - first:
+      213: 692472224656004060
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_19
+  - first:
+      213: 6501414383322724233
+    second: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_20
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1313
+        width: 1182
+        height: 1180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75fddddde49359e60800000000000000
+      internalID: 7968338126594498391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_1
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 1313
+        width: 1182
+        height: 1180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a35162abe30274230800000000000000
+      internalID: 3622899879025972538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_2
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 2397
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1d68cea9ebb3c6a0800000000000000
+      internalID: -6430089230620791524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_3
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 1969
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caf2a621e9f71e2b0800000000000000
+      internalID: -5557020148307972180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_4
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 1796
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 664b06549051287d0800000000000000
+      internalID: -2917746479019805594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_5
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 1368
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4970077af84c9e2c0800000000000000
+      internalID: -4401771039509444716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_6
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 111
+        width: 1182
+        height: 1180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bafd911ab2eda6ce0800000000000000
+      internalID: -1411071254259441749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_7
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 111
+        width: 1182
+        height: 1180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 414a54cffef6c17b0800000000000000
+      internalID: -5252199988900551660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_8
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 1195
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84d5958a552b31ff0800000000000000
+      internalID: -66513488514032312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_9
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 767
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd83967dcc12c51a0800000000000000
+      internalID: -6819538572074731301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_10
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 594
+        width: 90
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e83535266fcabc300800000000000000
+      internalID: 273502376597607310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_11
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 166
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b568aaca87dea050800000000000000
+      internalID: 5813821160087381429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_12
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 0
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42e70e2c1f906da60800000000000000
+      internalID: 7698351546997702180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_13
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 0
+        width: 35
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9119a2b1859203580800000000000000
+      internalID: -8849527809393389287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_14
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 0
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91c4b159fedd475e0800000000000000
+      internalID: -1912659920657101799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_15
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 0
+        width: 35
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc597a9ea16592e80800000000000000
+      internalID: -8202930572689435187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_16
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 0
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7de98937b1a048420800000000000000
+      internalID: 2631239195310989015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_17
+      rect:
+        serializedVersion: 2
+        x: 1687
+        y: 0
+        width: 35
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78ef92fe213eac590800000000000000
+      internalID: -7653054946301313401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_18
+      rect:
+        serializedVersion: 2
+        x: 1809
+        y: 0
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 795312f81ae0e50c0800000000000000
+      internalID: -4585211283562744425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_19
+      rect:
+        serializedVersion: 2
+        x: 2288
+        y: 0
+        width: 35
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd31277c1d72c9900800000000000000
+      internalID: 692472224656004060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_20
+      rect:
+        serializedVersion: 2
+        x: 2410
+        y: 0
+        width: 90
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 987f0978fe9a93a50800000000000000
+      internalID: 6501414383322724233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_0: 7968338126594498391
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_1: 3622899879025972538
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_10: 273502376597607310
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_11: 5813821160087381429
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_12: 7698351546997702180
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_13: -8849527809393389287
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_14: -1912659920657101799
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_15: -8202930572689435187
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_16: 2631239195310989015
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_17: -7653054946301313401
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_18: -4585211283562744425
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_19: 692472224656004060
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_2: -6430089230620791524
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_20: 6501414383322724233
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_3: -5557020148307972180
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_4: -2917746479019805594
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_5: -4401771039509444716
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_6: -1411071254259441749
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_7: -5252199988900551660
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_8: -66513488514032312
+      pngtree-stone-game-button-play-pause-setting-cartoon-icon-vector-png-image_15273849_9: -6819538572074731301
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

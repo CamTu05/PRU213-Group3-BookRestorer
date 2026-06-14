@@ -8,7 +8,16 @@ public class KillZone : MonoBehaviour
         {
             Debug.Log("Player đã rơi xuống vực!");
 
-            GameManager.Instance.RespawnPlayer(collision.gameObject);
+            Player playerScript = collision.GetComponent<Player>();
+            if (playerScript != null)
+            {
+                playerScript.TakeDamage(1); 
+            }
+
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.RespawnPlayer(collision.gameObject);
+            }
         }
     }
 }
