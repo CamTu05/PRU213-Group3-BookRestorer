@@ -30,7 +30,7 @@ public class HiddenSpikes : MonoBehaviour
     [SerializeField] private float knockbackDuration = 0.3f; // Thời gian bay trên không
 
     [Header("Cấu Hình Disable Input")]
-    [SerializeField] private float inputDisableDuration = 2.0f; // Vô hiệu hóa điều khiển 2 giây theo yêu cầu
+    [SerializeField] private float inputDisableDuration = 2.0f; // Vô hiệu hóa điều khiển 2 giây 
 
     [Header("Cấu Hình Nhấp Nháy")]
     [SerializeField] private float flashDuration = 1.5f;

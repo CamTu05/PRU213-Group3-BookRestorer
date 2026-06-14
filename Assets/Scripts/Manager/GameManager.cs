@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿//Author: Lê Cẩm Tú
+//Date: 07/06/2026
+//Description: Quản lý điểm hồi sinh của người chơi. Khi người chơi chạm vào Checkpoint, sẽ cập nhật điểm hồi sinh mới. Khi người chơi rơi vào KillZone, sẽ được hồi sinh tại điểm hồi sinh hiện tại
+
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -49,5 +54,11 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log("Player đã hồi sinh về vị trí an toàn!");
+    }
+
+    public void BackToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Home_Screen");
     }
 }
