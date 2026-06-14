@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5050892670936743124}
   - component: {fileID: 7827448617598091012}
   - component: {fileID: 5229776695373171624}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -184,9 +184,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   moveSpeed: 8
-  jumpForce: 12
+  jumpForce: 19
   fallMultiplier: 3.5
-  lowJumpMultiplier: 3
+  lowJumpMultiplier: 19
   groundCheck: {fileID: 2763321591086157296}
   checkRadius: 0.5
   groundLayer:
@@ -332,7 +332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4579842107875422253}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LedgeCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -363,7 +363,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2763321591086157296}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
