@@ -1,4 +1,16 @@
-﻿using System;
+﻿//Author: Nguyễn Phương Nam
+//Date: 31/05/2026
+//Description: Quản lý hành vi của nhân vật người chơi, bao gồm di chuyển, nhảy
+
+//Author: Nguyễn Tín Nghĩa
+//Date: 03/06/2026
+//Description: Thêm xử lý UI liên quan đến điểm số và sức khỏe. Cũng bao gồm cơ chế bắt ledge để tăng tính tương tác khi chơi.
+
+//Author: Nguyễn Văn Đức
+//Date: 07/06/2026
+//Description: Thêm xử lý va chạm để cập nhật máu, vàng 
+
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;

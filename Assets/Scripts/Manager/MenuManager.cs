@@ -1,3 +1,7 @@
+//Author: Nguyễn Văn Đức
+//Date: 10/06/2026
+//Description: Quản lý menu chính, bảng pause và chức năng restart game
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,13 +9,12 @@ public class MenuManager : MonoBehaviour
 {
     [Header("UI Panels")]
     public GameObject startPanel;
-    public GameObject pausePanel; // <--- Ô mới: Để kéo thả bảng Pause vào đây
+    public GameObject pausePanel; 
 
     private static bool isRetrying = false;
 
     private void Start()
     {
-        // Tự động ẩn bảng Pause khi mới vào game đề phòng bạn quên tắt trong Unity
         if (pausePanel != null) pausePanel.SetActive(false);
 
         if (startPanel != null)

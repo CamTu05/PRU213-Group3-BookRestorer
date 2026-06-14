@@ -1,3 +1,7 @@
+//Author: Nguyễn Tín Nghĩa
+//Date: 11/06/2026
+//Description: Quản lý menu chính, bao gồm các chức năng bắt đầu trò chơi, hướng dẫn và thoát game.
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
