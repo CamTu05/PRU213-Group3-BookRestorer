@@ -1,183 +1,78 @@
-/*
- * author chittp
- * description: tao bay co dinh cho nhan vat di qua bat lai va khoa input
- * last update day: 260613
- */
 using UnityEngine;
-using UnityEngine.Events;
 using System.Collections;
 
 public class Spikes : MonoBehaviour
 {
-    [Header("Sự Kiện Kích Hoạt")]
-    public UnityEvent OnPlayerHitSpikes;
+    [Header("Linh Kiện Phát Âm Thanh")]
+    public AudioSource trapAudioSource;
 
-    [Header("Cấu Hình Phát Hiện Player")]
-    [SerializeField] private float detectionRadius = 0.5f;
-    [SerializeField] private LayerMask playerLayer;
-
-    [Header("Cấu Hình Dịch Chuyển")]
-    [SerializeField] private float teleportBackDistance = 3f;
-
-    [Header("Cấu Hình Nhấp Nháy")]
-    [SerializeField] private float flashDuration = 1.5f;
-    [SerializeField] private float flashInterval = 0.1f;
-
-    [Header("Cấu Hình Disable Input")]
-    [SerializeField] private float inputDisableDuration = 1.0f;
-
-    private const float DETECTION_COOLDOWN = 0.5f;
-    private const float MIN_RADIUS = 0.1f;
-    private const string PLAYER_TAG = "Player";
+    [Header("Cấu Hình Hậu Quả")]
+    public float knockbackForceX = 2f;
+    public float knockbackForceY = 5f;
+    public float flashDuration = 1.5f;
+    public float flashInterval = 0.1f;
 
     private bool isPlayerInvincible = false;
-    private float detectionCooldown = 0f;
-    private Coroutine currentFlashRoutine = null;
 
-    private void Start()
+    // 1. phát hiện vâthj thể đi vào vùng kích hoạt của bẫy
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        ValidateSettings();
-    }
-
-    private void ValidateSettings()
-    {
-        if (playerLayer.value == 0)
+        if (collision.CompareTag("Player"))
         {
-            Debug.LogError($"[Spikes] ⚠️ playerLayer chưa được set! Hãy set Layer của Player trong Inspector.", gameObject);
-            enabled = false;
-            return;
-        }
-        if (detectionRadius < MIN_RADIUS) detectionRadius = MIN_RADIUS;
-    }
-
-    private void Update()
-    {
-        if (detectionCooldown > 0)
-        {
-            detectionCooldown -= Time.deltaTime;
-            return;
-        }
-
-        if (!isPlayerInvincible)
-        {
-            DetectAndHitPlayer();
+            ExecuteHit(collision.gameObject, transform.position);
         }
     }
 
-    private void DetectAndHitPlayer()
+    // 2. HÀM TRUNG TÂM
+    public void ExecuteHit(GameObject go, Vector3 trapPosition)
     {
-        Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, detectionRadius, playerLayer);
+        if (isPlayerInvincible) return;
+        trapAudioSource.Play();
 
-        if (playerCollider != null && playerCollider.CompareTag(PLAYER_TAG))
+        // Trừ máu Player
+        Player playerScript = go.GetComponent<Player>();
+        if (playerScript != null) playerScript.TakeDamage(1);
+
+        SpriteRenderer playerSR = go.GetComponent<SpriteRenderer>();
+        Rigidbody2D playerRb = go.GetComponent<Rigidbody2D>();
+
+        if (playerSR != null && playerScript != null && playerRb != null)
         {
-            detectionCooldown = DETECTION_COOLDOWN;
-            ExecuteHit(playerCollider.gameObject);
+            // TÍNH TOÁN LỰC ĐẨY VẬT LÝ (KNOCKBACK FORCE)
+            float direction = go.transform.position.x > trapPosition.x ? 1f : -1f;
+
+            // Tạo Vector lực: đẩy sang trái/phải (direction * knockbackForceX) và hất nhẹ lên (knockbackForceY)
+            Vector2 knockbackVector = new Vector2(direction * knockbackForceX, knockbackForceY);
+
+            // Bắt đầu Coroutine xử lý hiệu ứng, truyền thêm lực đẩy vào
+            StartCoroutine(PlayerImpactRoutine(playerSR, go, playerScript, playerRb, knockbackVector));
         }
     }
 
-    private void ExecuteHit(GameObject playerObj)
-    {
-        if (playerObj == null) return;
-
-        OnPlayerHitSpikes?.Invoke();
-
-        // Trừ tim của Player thông qua hàm gốc
-        Player playerScript = playerObj.GetComponent<Player>();
-        if (playerScript != null)
-        {
-            playerScript.TakeDamage(1);
-        }
-
-        // Dịch chuyển Player ra xa bẫy
-        TeleportPlayer(playerObj);
-
-        // Khóa Input và Ép nhấp nháy ngay lập tức (Bỏ qua iframe của Player)
-        SpriteRenderer playerSR = playerObj.GetComponent<SpriteRenderer>();
-        if (playerSR != null)
-        {
-            if (currentFlashRoutine != null) StopCoroutine(currentFlashRoutine);
-            currentFlashRoutine = StartCoroutine(PlayerImpactRoutine(playerSR, playerObj));
-        }
-    }
-
-    private void TeleportPlayer(GameObject playerObj)
-    {
-        Rigidbody2D playerRb = playerObj.GetComponent<Rigidbody2D>();
-        if (playerRb != null && playerRb.bodyType != RigidbodyType2D.Static)
-        {
-            playerRb.linearVelocity = Vector2.zero;
-        }
-
-        float direction = playerObj.transform.position.x > transform.position.x ? 1f : -1f;
-        Vector3 targetPos = playerObj.transform.position;
-        targetPos.x = transform.position.x + (direction * teleportBackDistance);
-        playerObj.transform.position = targetPos;
-    }
-
-    private IEnumerator PlayerImpactRoutine(SpriteRenderer playerSR, GameObject playerObj)
+    private IEnumerator PlayerImpactRoutine(SpriteRenderer playerSR, GameObject playerObj, Player playerScript, Rigidbody2D playerRb, Vector2 knockbackVector)
     {
         isPlayerInvincible = true;
+        playerScript.enabled = false;
 
-        Rigidbody2D playerRb = playerObj.GetComponent<Rigidbody2D>();
-        Player playerMovement = playerObj.GetComponent<Player>();
-
-        // KIỂM TRA CHỐNG LỖI: Nếu player đã chết hoặc script đã bị tắt trước đó thì thoát ngay
-        if (playerMovement == null || !playerMovement.enabled || playerRb == null || playerRb.bodyType == RigidbodyType2D.Static)
-        {
-            isPlayerInvincible = false;
-            yield break;
-        }
-
-        // KHÓA INPUT: Xóa sạch vận tốc ngang để không bị trượt đi khi bấm nút
-        playerRb.linearVelocity = new Vector2(0, playerRb.linearVelocity.y);
-        playerMovement.enabled = false;
+        // ÁP DỤNG LỰC VẬT LÝ
+        // Triệt tiêu vận tốc cũ để lực đẩy mới chính xác, không bị ảnh hưởng bởi vận tốc trước đó của Player
+        playerRb.linearVelocity = Vector2.zero;
+        // Sử dụng ForceMode2D.Impulse 
+        playerRb.AddForce(knockbackVector, ForceMode2D.Impulse);
 
         float elapsed = 0f;
-        float inputTimer = 0f;
-        bool isInputRestored = false;
-
         while (elapsed < flashDuration)
         {
-            if (playerObj == null || playerSR == null) yield break;
-
-            // Nhấp nháy cưỡng bức bằng cách ẩn/hiện thành phần hiển thị Sprite
-            playerSR.enabled = false;
+            playerSR.enabled = false; // ẩn
             yield return new WaitForSeconds(flashInterval);
-
-            playerSR.enabled = true;
+            playerSR.enabled = true; //hiện
             yield return new WaitForSeconds(flashInterval);
-
-            float step = flashInterval * 2;
-            elapsed += step;
-            inputTimer += step;
-
-            // Khi hết thời gian disable input quy định, trả lại quyền điều khiển
-            if (!isInputRestored && inputTimer >= inputDisableDuration)
-            {
-                if (playerMovement != null && playerRb != null && playerRb.bodyType != RigidbodyType2D.Static)
-                {
-                    playerMovement.enabled = true;
-                }
-                isInputRestored = true;
-            }
+            elapsed += (flashInterval * 2);
         }
 
-        if (playerSR != null) playerSR.enabled = true;
-        if (!isInputRestored && playerMovement != null && playerRb != null && playerRb.bodyType != RigidbodyType2D.Static)
-        {
-            playerMovement.enabled = true;
-        }
-
+        playerSR.enabled = true;
+        playerScript.enabled = true;
         isPlayerInvincible = false;
-        currentFlashRoutine = null;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (detectionRadius > 0)
-        {
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(transform.position, detectionRadius);
-        }
     }
 }

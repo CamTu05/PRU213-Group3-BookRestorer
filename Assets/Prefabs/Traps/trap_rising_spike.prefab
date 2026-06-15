@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 84338849630332861}
   - component: {fileID: 8174998772595382658}
   - component: {fileID: 5455896020712701058}
-  - component: {fileID: 8551621046795371121}
   - component: {fileID: -4985363603372805557}
   - component: {fileID: 6986625353527667861}
+  - component: {fileID: 3575882932998759388}
   m_Layer: 0
   m_Name: trap_rising_spike
   m_TagString: Trap
@@ -117,47 +117,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8551621046795371121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3556858753491016031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7369bf864e3280c4394a32e5927904fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HiddenSpikes
-  OnPlayerHitSpikes:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6986625353527667861}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: PlayOneShot
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 89c29e123efefce47b9210285b8d8422, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  damageCollider: {fileID: -4985363603372805557}
-  detectionRadius: 0.5
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  warningTime: 0.4
-  activeTime: 1.2
-  retractTime: 0.5
-  knockbackXSpeed: 10
-  knockbackUpSpeed: 10
-  knockbackDuration: 0.25
-  inputDisableDuration: 2
-  flashDuration: 1.5
-  flashInterval: 0.1
 --- !u!61 &-4985363603372805557
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -192,7 +151,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.026312813, y: 0.47481322}
+  m_Offset: {x: -0.026312672, y: -0.525187}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -202,7 +161,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.18414837, y: 0.40225172}
+  m_Size: {x: 0.18414862, y: 0.40225124}
   m_EdgeRadius: 0
 --- !u!82 &6986625353527667861
 AudioSource:
@@ -301,3 +260,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3575882932998759388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3556858753491016031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae791390c2c79444fbc6f268a9bdfd8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Spikes
+  trapAudioSource: {fileID: 6986625353527667861}
+  knockbackForceX: 1
+  knockbackForceY: 5
+  flashDuration: 1.5
+  flashInterval: 0.1
