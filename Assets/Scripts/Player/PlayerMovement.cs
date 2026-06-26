@@ -237,7 +237,7 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("IsLedgeGrab", isLedgeGrabbing);
             anim.SetBool("IsGrounded", isGrounded);
             anim.SetFloat("VelocityY", rb.linearVelocity.y);
-            //start:ChiTTp_Dong bo cui nguoi_260626
+            //start:ChiTTP_Dong bo cui nguoi_260626
             anim.SetBool("IsCrouching", isCrouching);
             //end
         }
