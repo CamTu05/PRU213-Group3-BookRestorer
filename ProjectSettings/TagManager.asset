@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Coin
   - Trap
+  - Letter
   layers:
   - Default
   - TransparentFX

@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edcb5b3cf6213a94c94e93b4f7664a8d, type: 3}
+  m_Name: LetterSpriteData
+  m_EditorClassIdentifier: Assembly-CSharp::LetterSpriteData
+  alphabetSprites:
+  - letter: 65
+    sprite: {fileID: 2140742546967694334, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 66
+    sprite: {fileID: -1373624916770898127, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 67
+    sprite: {fileID: -9091934553578572598, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 68
+    sprite: {fileID: -805146096193575587, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 72
+    sprite: {fileID: -4193134406600451401, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 81
+    sprite: {fileID: 1908880635955362668, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 73
+    sprite: {fileID: 430550783196928764, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 74
+    sprite: {fileID: -51137448852511224, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 83
+    sprite: {fileID: -5984420725317067792, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 75
+    sprite: {fileID: -3462418750489208506, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 84
+    sprite: {fileID: -6996275642296597568, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 76
+    sprite: {fileID: -5193188128714799449, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 77
+    sprite: {fileID: 850870312854468564, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 69
+    sprite: {fileID: -7120817706847455242, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 86
+    sprite: {fileID: -8576838814908742131, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 78
+    sprite: {fileID: -278554157157428296, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 70
+    sprite: {fileID: -1192546077312915801, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 87
+    sprite: {fileID: 8083420082562405123, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 79
+    sprite: {fileID: 166676114155834467, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 88
+    sprite: {fileID: -2240673205248819950, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 80
+    sprite: {fileID: -3818735286021609070, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 71
+    sprite: {fileID: 6930403378967941158, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 82
+    sprite: {fileID: -1128299455123691637, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 89
+    sprite: {fileID: -652192163073892585, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 85
+    sprite: {fileID: 526025795924417022, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
+  - letter: 90
+    sprite: {fileID: 7281023922839424203, guid: c4f8a12db102f5348a221340ecfff6b0, type: 3}
