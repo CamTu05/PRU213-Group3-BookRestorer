@@ -105,29 +105,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae791390c2c79444fbc6f268a9bdfd8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spikes
-  OnPlayerHitSpikes:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 802969988211073974}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: PlayOneShot
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 89c29e123efefce47b9210285b8d8422, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  detectionRadius: 0.5
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  teleportBackDistance: 3
+  trapAudioSource: {fileID: 802969988211073974}
+  knockbackForceX: 2
+  knockbackForceY: 5
   flashDuration: 1.5
   flashInterval: 0.1
-  inputDisableDuration: 1
 --- !u!82 &802969988211073974
 AudioSource:
   m_ObjectHideFlags: 0
