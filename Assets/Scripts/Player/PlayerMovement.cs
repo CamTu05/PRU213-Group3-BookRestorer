@@ -24,6 +24,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float ledgeJumpForce = 12f;
     [SerializeField] private LayerMask wallLayer;
 
+    [Header("Attack Settings")]
+    [SerializeField] private Transform attackPoint;      // Tâm của Hitbox đặt trước mặt Player
+    [SerializeField] private float attackRange = 1.3f;    // Bán kính vùng đánh
+    [SerializeField] private float damageAmount = 25f;
+
     private Rigidbody2D rb;
     private Animator anim;
 
@@ -150,13 +155,36 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //ChiTTP_Kich hoatj Trigger tan cong_260626
-    private void Attack()
+   
+       private void Attack()
     {
         if (anim != null)
         {
             anim.SetTrigger("Attack");
         }
+
+        if (attackPoint == null) return;
+
+        // Quét TẤT CẢ các Collider nằm trong vòng tròn Hitbox (không lọc theo Layer nữa)
+        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
+
+        // Duyệt qua từng đối tượng quét trúng
+        foreach (Collider2D obj in hitObjects)
+        {
+            // Kiểm tra xem đối tượng đó có Tag là "Enemy" hay không
+            if (obj.CompareTag("Enemy"))
+            {
+                // Lấy Component Enemy từ quái để trừ máu
+                Enemy enemy = obj.GetComponent<Enemy>();
+
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(damageAmount);
+                }
+            }
+        }
     }
+
 
     private void Move()
     {
@@ -282,6 +310,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(ledgeCheck.position, ledgeCheckRadius);
+        }
+        if (attackPoint != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         }
     }
 }
