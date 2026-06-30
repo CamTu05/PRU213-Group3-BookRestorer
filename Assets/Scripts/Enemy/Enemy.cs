@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
     protected Animator anim;
     protected Transform playerTransform;
 
+    [Header("Health setting")]
+    [SerializeField] private EnemyHealthBarAnimate healthBar;
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -37,6 +39,12 @@ public class Enemy : MonoBehaviour
 
         currentHealth -= damageAmount;
         Debug.Log($"{gameObject.name} trúng đòn! Máu còn: {currentHealth}/{maxHealth}");
+
+        // CẬP NHẬT Ở ĐÂY: Gọi thanh máu nhảy frame ảnh
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealthBar(currentHealth, maxHealth);
+        }
 
         // Kích hoạt animation bị đau (IsHit)
         StopAllCoroutines();
