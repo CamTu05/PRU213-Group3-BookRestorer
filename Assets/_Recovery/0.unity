@@ -3813,7 +3813,6 @@ RectTransform:
   - {fileID: 2011327547}
   - {fileID: 594003115}
   - {fileID: 1753246138}
-  - {fileID: 2077255957}
   m_Father: {fileID: 1556834860}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -20494,7 +20493,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Button
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -22207,6 +22206,7 @@ Transform:
   - {fileID: 2017258151}
   - {fileID: 230091597}
   - {fileID: 971615851}
+  - {fileID: 2077255957}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1984633067
@@ -22757,9 +22757,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2077255956}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -959.62024, y: -540.21375, z: 0}
-  m_LocalScale: {x: 2.279383, y: 2.279383, z: 2.279383}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 514472427}
@@ -22768,7 +22768,7 @@ Transform:
   - {fileID: 649618680}
   - {fileID: 551200082}
   - {fileID: 584997058}
-  m_Father: {fileID: 670563184}
+  m_Father: {fileID: 1972675292}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2089525561
 GameObject:
