@@ -20,19 +20,25 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Ledge Grab Settings")]
     [SerializeField] private Transform ledgeCheck;
-    [SerializeField] private float ledgeCheckRadius = 0.15f;
+    [SerializeField] private float ledgeCheckRadius = 0.3f; 
     [SerializeField] private float ledgeJumpForce = 12f;
     [SerializeField] private LayerMask wallLayer;
+    //start: ChiTTP_Tốc độ leo tường_010726
+    [SerializeField] private float climbSpeed = 4f;
+    //end
 
     [Header("Attack Settings")]
-    [SerializeField] private Transform attackPoint;      // Tâm của Hitbox đặt trước mặt Player
-    [SerializeField] private float attackRange = 1.3f;    // Bán kính vùng đánh
+    [SerializeField] private Transform attackPoint;      
+    [SerializeField] private float attackRange = 1.3f;   
     [SerializeField] private float damageAmount = 25f;
 
     private Rigidbody2D rb;
     private Animator anim;
 
     private float horizontalInput;
+    //start: ChiTTP_Lấy thêm input dọc để leo tường_010726
+    private float verticalInput;
+    //end
     private bool isFacingRight = true;
     [SerializeField] private bool isGrounded;
     private bool shouldJump;
@@ -40,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isTouchingLedge;
     private bool isLedgeGrabbing;
     //start
-    //ChiTTP_Them trang thai cui va leo_260626
+    //ChiTTP_Tam trang thai cui va leo_260626
     private bool isCrouching;
     private bool wantsToClimb;
     //end
@@ -73,18 +79,18 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleInput();
         UpdateAnimations();
-       
     }
 
     private void FixedUpdate()
     {
         CheckGround();
         CheckLedge();
-        
+
         if (isLedgeGrabbing)
         {
+          
             rb.gravityScale = 0f;
-            rb.linearVelocity = Vector2.zero;
+            rb.linearVelocity = new Vector2(0f, verticalInput * climbSpeed);
         }
         else
         {
@@ -98,22 +104,27 @@ public class PlayerMovement : MonoBehaviour
     private void HandleInput()
     {
         var keyboard = Keyboard.current;
-        //start
-        //ChiTTP_Lay thong tin chuot_260626
         var mouse = Mouse.current;
-        //end
         if (keyboard == null) return;
 
+
         horizontalInput = 0f;
+        if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed) horizontalInput = -1f;
+        if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed) horizontalInput = 1f;
+
+ 
         if (!isLedgeGrabbing)
         {
-            if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed) horizontalInput = -1f;
-            if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed) horizontalInput = 1f;
             FlipController();
         }
-        //start
-        //ChiTTP_Xu ly cui nguoi S or down
-        if (isGrounded && (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed))
+
+     
+        verticalInput = 0f;
+        if (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed) verticalInput = 1f;
+        if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed) verticalInput = -1f;
+
+       
+        if (isGrounded && !isLedgeGrabbing && (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed))
         {
             isCrouching = true;
         }
@@ -121,22 +132,20 @@ public class PlayerMovement : MonoBehaviour
         {
             isCrouching = false;
         }
-        //end
-        //start
-        //ChiTTP_Ktra dk leo tuong Shift or Z
+
+  
         bool shiftAndUp = keyboard.shiftKey.isPressed;
         bool zPressed = keyboard.zKey.isPressed;
         wantsToClimb = shiftAndUp || zPressed;
-        //end
-        //Start
-        //ChiTTp_Tan caong bang chuot trai_260626
+
+       
         if (mouse != null && mouse.leftButton.wasPressedThisFrame)
         {
             Attack();
         }
-        //end
 
-        if (keyboard.spaceKey.wasPressedThisFrame )
+   
+        if (keyboard.spaceKey.wasPressedThisFrame)
         {
             if (isGrounded)
             {
@@ -144,63 +153,44 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (isLedgeGrabbing)
             {
-                ledgeGrabCooldown = 0.25f;
+                ledgeGrabCooldown = 0.3f;
                 isLedgeGrabbing = false;
                 rb.gravityScale = 3f;
 
-                float jumpDirection = isFacingRight ? 1f : -1f;
-                rb.linearVelocity = new Vector2(jumpDirection * moveSpeed * 0.4f, ledgeJumpForce);
+              
+                float jumpDirection = isFacingRight ? -1f : 1f;
+                rb.linearVelocity = new Vector2(jumpDirection * moveSpeed * 0.8f, ledgeJumpForce);
             }
         }
     }
 
-    //ChiTTP_Kich hoatj Trigger tan cong_260626
-   
-       private void Attack()
+    private void Attack()
     {
-        if (anim != null)
-        {
-            anim.SetTrigger("Attack");
-        }
-
+        if (anim != null) anim.SetTrigger("Attack");
         if (attackPoint == null) return;
 
-        // Quét TẤT CẢ các Collider nằm trong vòng tròn Hitbox (không lọc theo Layer nữa)
         Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
-
-        // Duyệt qua từng đối tượng quét trúng
         foreach (Collider2D obj in hitObjects)
         {
-            // Kiểm tra xem đối tượng đó có Tag là "Enemy" hay không
             if (obj.CompareTag("Enemy"))
             {
-                // Lấy Component Enemy từ quái để trừ máu
                 Enemy enemy = obj.GetComponent<Enemy>();
-
-                if (enemy != null)
-                {
-                    enemy.TakeDamage(damageAmount);
-                }
+                if (enemy != null) enemy.TakeDamage(damageAmount);
             }
         }
     }
-
 
     private void Move()
     {
-        //start: ChiTTP_giam toc do khi cui nguoi + di chuyen_260626
         float currentSpeed = isCrouching ? moveSpeed * crouchSpeedMultiplier : moveSpeed;
         rb.linearVelocity = new Vector2(horizontalInput * currentSpeed, rb.linearVelocity.y);
-        //end
     }
 
     private void Jump()
     {
         if (shouldJump)
         {
-            //start:ChiTTP_ko cho nhay neu dang cui nguoi_260626
             if (isCrouching) return;
-            //end
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             shouldJump = false;
         }
@@ -240,20 +230,22 @@ public class PlayerMovement : MonoBehaviour
 
         if (ledgeCheck != null)
         {
-            bool wasTouchingLedge = isTouchingLedge;
-            isTouchingLedge = Physics2D.OverlapCircle(ledgeCheck.position, ledgeCheckRadius, wallLayer);
-            //start:ChiTTP_CHo bam togn neus thoa man nut bam yeu cau
+            
+            Vector2 rayDirection = new Vector2(transform.localScale.x, 0).normalized;
+            RaycastHit2D hit = Physics2D.Raycast(ledgeCheck.position, rayDirection, ledgeCheckRadius + 0.2f, wallLayer);
+
+            isTouchingLedge = (hit.collider != null);
+
             if (isTouchingLedge && !isGrounded && wantsToClimb)
             {
                 isLedgeGrabbing = true;
             }
-            //dang bam maf buong ra thi roi
-            if (isLedgeGrabbing && (!wantsToClimb|| isGrounded))
+
+            if (isLedgeGrabbing && (!wantsToClimb || isGrounded || !isTouchingLedge))
             {
                 isLedgeGrabbing = false;
-                ledgeGrabCooldown = 0.25f;
+                ledgeGrabCooldown = 0.2f;
             }
-            //end
         }
     }
 
@@ -265,9 +257,8 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("IsLedgeGrab", isLedgeGrabbing);
             anim.SetBool("IsGrounded", isGrounded);
             anim.SetFloat("VelocityY", rb.linearVelocity.y);
-            //start:ChiTTP_Dong bo cui nguoi_260626
             anim.SetBool("IsCrouching", isCrouching);
-            //end
+            anim.SetFloat("ClimbSpeed", Mathf.Abs(verticalInput));
         }
     }
 
@@ -309,7 +300,8 @@ public class PlayerMovement : MonoBehaviour
         if (ledgeCheck != null)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(ledgeCheck.position, ledgeCheckRadius);
+            Vector3 direction = new Vector3(transform.localScale.x, 0, 0).normalized;
+            Gizmos.DrawLine(ledgeCheck.position, ledgeCheck.position + direction * (ledgeCheckRadius + 0.2f));
         }
         if (attackPoint != null)
         {
