@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffca10dde6ff73e418e2c18a85c8aef3, type: 3}
+  m_Name: Book_Ice
+  m_EditorClassIdentifier: Assembly-CSharp::BookData
+  bookId: ice_book
+  bookName: The Ice Book
+  description: Let's go to find Elsa...
+  coverImage: {fileID: -8179522610657087616, guid: d48affc572f454c4f9fd6099345f57b0, type: 3}
+  levels: []
