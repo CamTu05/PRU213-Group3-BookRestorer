@@ -6,6 +6,9 @@ using System.Collections.Generic;
 [RequireComponent(typeof(AudioSource))]
 public class PlayerInventory : MonoBehaviour
 {
+    [SerializeField] private GameObject hintPanel;
+    [SerializeField] private TextMeshProUGUI hintText;
+    [SerializeField] private int hintCost = 5;
     [Header("Coin & UI Settings")]
     [SerializeField] private AudioClip coinSound;
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -289,8 +292,25 @@ public class PlayerInventory : MonoBehaviour
 
         if (collision.CompareTag("Finish"))
         {
+            if (!HasCollectedAllLetters())
+            {
+                Debug.Log("Bạn chưa nhặt đủ chữ!");
+
+                if (statusText != null)
+                {
+                    statusText.text = "<color=yellow>Hãy nhặt đủ các chữ cái trước!</color>";
+                }
+
+                return;
+            }
+
+            // Đã nhặt đủ chữ
+            Debug.Log("Đã nhặt đủ chữ, mở bảng ghép.");
             Debug.Log("Nhân vật đã chạm vào LevelExit_Portal! Tự động mở bảng ghép chữ.");
             canSolveWord = true;
+            if (playerMovement != null)
+                playerMovement.LockPlayer();
+         
             foreach (DragItem drag in FindObjectsOfType<DragItem>())
     {
         drag.enabled = true;
@@ -319,5 +339,44 @@ public class PlayerInventory : MonoBehaviour
         {
             scoreText.text = "Coins: " + score;
         }
+    }
+    public void OnHintButtonClicked()
+    {
+        hintPanel.SetActive(true);
+
+        hintText.text = "Mua gợi ý sẽ tốn " + hintCost + " Coin.\n\nBạn có muốn tiếp tục?";
+    }
+    public void OnHintOKClicked()
+    {
+        if (score < hintCost)
+        {
+            hintText.text = "Không đủ Coin!";
+            return;
+        }
+
+        score -= hintCost;
+        UpdateScoreUI();
+
+        // Tìm tất cả các ô ghép chữ
+        DropSlot[] slots = FindObjectsOfType<DropSlot>();
+
+        // Sắp xếp theo thứ tự từ trái sang phải
+        System.Array.Sort(slots, (a, b) => a.transform.GetSiblingIndex().CompareTo(b.transform.GetSiblingIndex()));
+
+        for (int i = 0; i < targetWord.Length; i++)
+        {
+            if (slots[i].GetLetter() != targetWord[i].ToString())
+            {
+                hintText.text = $"Gợi ý:\nChữ thứ {i + 1} là '{targetWord[i]}'";
+                return;
+            }
+        }
+
+        // Nếu tất cả đều đúng
+        hintText.text = "Bạn đã ghép đúng hết rồi!";
+    }
+    public void CloseHintPanel()
+    {
+        hintPanel.SetActive(false);
     }
 }

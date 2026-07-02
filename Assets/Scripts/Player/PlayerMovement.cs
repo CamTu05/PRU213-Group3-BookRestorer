@@ -66,6 +66,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (isLocked)
+        {
+            horizontalInput = 0;
+            return;
+        }
         HandleInput();
         UpdateAnimations();
        
@@ -73,6 +78,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isLocked)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
         CheckGround();
         CheckLedge();
         
@@ -284,4 +294,20 @@ public class PlayerMovement : MonoBehaviour
             Gizmos.DrawWireSphere(ledgeCheck.position, ledgeCheckRadius);
         }
     }
+    private bool isLocked = false;
+
+    public void LockPlayer()
+{
+    isLocked = true;
+    horizontalInput = 0f;
+    rb.linearVelocity = Vector2.zero;
+
+    if (anim != null)
+    {
+        anim.SetBool("IsRun", false);
+        anim.SetBool("IsCrouching", false);
+        anim.SetBool("IsLedgeGrab", false);
+        anim.SetFloat("VelocityY", 0);
+    }
+}
 }
