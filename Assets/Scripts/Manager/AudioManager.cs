@@ -15,6 +15,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
 
+    [Header("UI Sounds")]
+    [SerializeField] private AudioClip buttonHoverSound;
+    [SerializeField] private AudioClip buttonClickSound;
+
     // Khởi tạo Singleton và load volume đã lưu.
     private void Awake()
     {
@@ -89,5 +93,17 @@ public class AudioManager : MonoBehaviour
     {
         SetMusicVolume(GetMusicVolume());
         SetSFXVolume(GetSFXVolume());
+    }
+
+    // Phát âm thanh hover của button.
+    public void PlayButtonHover()
+    {
+        PlaySFX(buttonHoverSound);
+    }
+
+    // Phát âm thanh click của button.
+    public void PlayButtonClick()
+    {
+        PlaySFX(buttonClickSound);
     }
 }
