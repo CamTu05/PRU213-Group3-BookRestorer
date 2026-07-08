@@ -155,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
    
-        if (keyboard.spaceKey.wasPressedThisFrame)
+        if (keyboard.spaceKey.wasPressedThisFrame || keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed)
         {
             if (isGrounded)
             {
