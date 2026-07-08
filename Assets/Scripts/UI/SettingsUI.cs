@@ -11,7 +11,7 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
 
-    // Load giá trị volume vào slider khi mở game.
+    // Khởi tạo slider theo volume đã lưu.
     private void Start()
     {
         musicSlider.value = AudioManager.Instance.GetMusicVolume();
