@@ -1,6 +1,6 @@
 ﻿/* Author: TuLC
- * Date: 30 /6/26
- * Description: This script manages music and sound effect volume settings.
+ * Date: 30/6/26
+ * Description: This script manages all music and sound effects in the game.
  */
 
 using UnityEngine;
@@ -30,7 +30,25 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // Cập nhật âm lượng nhạc nền.
+    // Phát nhạc nền.
+    public void PlayMusic(AudioClip clip)
+    {
+        if (clip == null || musicSource == null) return;
+
+        musicSource.clip = clip;
+        musicSource.loop = true;
+        musicSource.Play();
+    }
+
+    // Phát hiệu ứng âm thanh.
+    public void PlaySFX(AudioClip clip)
+    {
+        if (clip == null || sfxSource == null) return;
+
+        sfxSource.PlayOneShot(clip);
+    }
+
+    // Set âm lượng nhạc nền.
     public void SetMusicVolume(float value)
     {
         if (musicSource != null)
@@ -42,7 +60,7 @@ public class AudioManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    // Cập nhật âm lượng hiệu ứng.
+    // Set âm lượng hiệu ứng.
     public void SetSFXVolume(float value)
     {
         if (sfxSource != null)
@@ -66,7 +84,7 @@ public class AudioManager : MonoBehaviour
         return PlayerPrefs.GetFloat(SFX_VOLUME_KEY, 1f);
     }
 
-    // Load âm lượng đã lưu vào AudioSource.
+    // Load volume từ PlayerPrefs.
     private void LoadVolume()
     {
         SetMusicVolume(GetMusicVolume());
