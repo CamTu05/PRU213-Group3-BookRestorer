@@ -363,6 +363,7 @@ GameObject:
   - component: {fileID: 4438386137993568975}
   - component: {fileID: 4408330532243526192}
   - component: {fileID: 4125212073413183472}
+  - component: {fileID: -3273508896705405398}
   m_Layer: 5
   m_Name: BookItem
   m_TagString: Untagged
@@ -472,7 +473,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.46429434, g: 0.7735849, b: 0.2787825, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -522,3 +523,15 @@ MonoBehaviour:
   bookNameText: {fileID: 4068441337389323781}
   descriptionText: {fileID: 2149509734899039777}
   button: {fileID: 4408330532243526192}
+--- !u!114 &-3273508896705405398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8869021870612488135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d20572701bc85418c33b277e833151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonSound

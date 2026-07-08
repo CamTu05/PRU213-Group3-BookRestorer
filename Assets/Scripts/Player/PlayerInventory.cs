@@ -268,7 +268,7 @@ public class PlayerInventory : MonoBehaviour
         {
             if (audioSource != null && coinSound != null)
             {
-                audioSource.PlayOneShot(coinSound);
+                AudioManager.Instance.PlaySFX(coinSound);
             }
             score++;
             UpdateScoreUI();
