@@ -10,20 +10,20 @@ public class LetterUIHelper : MonoBehaviour
     public void SetLetter(char letter, LetterSpriteData spriteData)
     {
         myLetter = char.ToUpper(letter);
+
         if (displayImage != null && spriteData != null)
         {
-            // 1. Tìm ảnh màu vàng tương ứng trong bộ sưu tập và thay thế vào UI
-            displayImage.sprite = spriteData.GetSpriteForLetter(myLetter);
+            Sprite sprite = spriteData.GetSpriteForLetter(myLetter);
 
-            // 2. ÉP BUỘC BẬT CHỐNG MÉO ẢNH (Thay vì phải tích tay ngoài Unity)
+            Debug.Log("Chữ: " + myLetter);
+            Debug.Log("Sprite tìm được: " + sprite);
+
+            displayImage.sprite = sprite;
             displayImage.preserveAspect = true;
-
-            // 3. Log kiểm tra xem code có thực sự chạy qua đây không
-            Debug.Log($"[LetterUIHelper] Đã đổi ảnh thành công cho quân chữ: {myLetter}");
         }
         else
         {
-            Debug.LogError("[LetterUIHelper] Thiếu liên kết! displayImage hoặc spriteData đang bị trống (Null)!");
+            Debug.LogError("displayImage hoặc spriteData bị Null");
         }
     }
 

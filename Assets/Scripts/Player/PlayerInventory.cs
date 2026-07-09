@@ -9,17 +9,30 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private GameObject hintPanel;
     [SerializeField] private TextMeshProUGUI hintText;
     [SerializeField] private int hintCost = 5;
+    [Header("Hint Content")]
+
+    [TextArea(2, 4)]
+    [SerializeField] private string hint1;
+
+    [TextArea(2, 4)]
+    [SerializeField] private string hint2;
+
+    [TextArea(2, 4)]
+    [SerializeField] private string hint3;
     [Header("Coin & UI Settings")]
     [SerializeField] private AudioClip coinSound;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject winPanel;
 
     [Header("Letter Drag & Drop System")]
-    [SerializeField] private GameObject letterPopupPanel;         // Bảng gỗ lớn chứa UI
-    [SerializeField] private string targetWord = "ANIMAL";         // Từ khóa cần hoàn thành
+    [SerializeField] private GameObject letterPopupPanel;           // Bảng gỗ lớn chứa UI
+    [SerializeField] private string targetWord = "ANIMAL";          // Từ khóa cần hoàn thành
     [SerializeField] private GameObject letterUIPrefab;           // File Prefab quân chữ (màu xanh dưới Project)
-    [SerializeField] private Transform lettersContainer;          // Hàng 1: Nơi chứa các chữ nhặt được lộn xộn (UI_Letters_Row)
-    [SerializeField] private TextMeshProUGUI statusText;           // Text hiển thị kết quả (Wrong! / Correct!) bên dưới nút Submit
+    [SerializeField] private Transform lettersContainer;
+    [SerializeField] private Transform slotsContainer;
+    [SerializeField] private GameObject dropSlotPrefab;          // Hàng 1: Nơi chứa các chữ nhặt được lộn xộn (UI_Letters_Row)
+    [SerializeField] private Button submitButton;                // 👉 THÊM BIẾN NÀY ĐỂ ẨN HIỆN NÚT SUBMIT
+    [SerializeField] private TextMeshProUGUI statusText;        // Text hiển thị kết quả (Wrong! / Correct!) bên dưới nút Submit
 
     [Header("Sprite Font Settings")]
     [SerializeField] private LetterSpriteData letterSpriteData; // Kho lưu trữ ảnh chữ cái ScriptableObject
@@ -36,6 +49,7 @@ public class PlayerInventory : MonoBehaviour
     private PlayerMovement playerMovement;
     private int score = 0;
     private bool canSolveWord = false;
+    private int currentHint = 0;
 
     private void Start()
     {
@@ -50,7 +64,7 @@ public class PlayerInventory : MonoBehaviour
     }
 
     // ========================================================
-    // HÀM ĐÓNG MỞ BẢNG GỖ (ĐÃ FIX LỖI TRÀN CHỮ KHI MỞ LẠI)
+    // HÀM ĐÓNG MỞ BẢNG GỖ (TỐI ƯU HÓA GỌI LOCK/UNLOCK CHO PLAYER)
     // ========================================================
     public void TogglePopup(bool show)
     {
@@ -60,38 +74,69 @@ public class PlayerInventory : MonoBehaviour
             {
                 letterPopupPanel.SetActive(true);
 
-                // 1. Reset dòng chữ thông báo kết quả về trống khi mở bảng
-                if (statusText != null) statusText.text = "";
-
-
-                // 2. [SỬA LỖI QUAN TRỌNG]: Tìm và xóa sạch tất cả các quân chữ cũ còn sót lại trong các ô vuông gỗ (SlotsContainer)
-                Transform boardTransform = lettersContainer.parent;
-                Transform slotsParent = boardTransform.Find("SlotsContainer");
-                if (slotsParent != null)
+                // Nếu canSolveWord = false (Dọc đường): Ẩn hoàn toàn ô trống kết quả và nút Submit
+                // Nếu canSolveWord = true (Tại Finish): Bật hiện lên đầy đủ để xếp chữ giải đố
+                if (slotsContainer != null)
                 {
-                    // Duyệt qua từng ô vuông gỗ con
-                    foreach (Transform slot in slotsParent)
-                    {
-                        // Nếu trong ô vuông gỗ đó có chứa quân chữ cái cũ, xóa nó ngay lập tức
-                        foreach (Transform child in slot)
-                        {
-                            Destroy(child.gameObject);
-                        }
-                    }
+                    slotsContainer.gameObject.SetActive(canSolveWord);
                 }
 
-                // 3. HÀNG 1: Xóa sạch các quân chữ UI cũ trên khay chứa lộn xộn để làm mới dữ liệu
+                if (submitButton != null)
+                {
+                    submitButton.gameObject.SetActive(canSolveWord);
+                }
+
+                // Chỉ khởi tạo sinh các ô trống kết quả hàng trên khi đã đứng ở cổng Finish
+                if (canSolveWord)
+                {
+                    CreateSlots();
+                }
+
+                // Reset dòng chữ thông báo kết quả về trống khi mở bảng
+                if (statusText != null) statusText.text = "";
+
+                // Hiện dòng nhắc nhở nhỏ nếu người chơi tự mở bảng khi đang đi dọc đường
+                if (!canSolveWord && statusText != null)
+                {
+                    statusText.text = "<color=yellow>Reach the final portal to solve!</color>";
+                }
+
+                // 🛑 GỌI HÀM KHÓA NHÂN VẬT GỌN GÀNG TỪ PLAYERMOVEMENT
+                if (playerMovement != null)
+                {
+                    playerMovement.LockPlayer();
+                }
+
+                // Xóa sạch các quân chữ UI cũ trên khay chứa lộn xộn để làm mới dữ liệu
                 if (lettersContainer != null)
                 {
+                    List<GameObject> childrenToDestroy = new List<GameObject>();
                     foreach (Transform child in lettersContainer)
                     {
-                        Destroy(child.gameObject);
+                        childrenToDestroy.Add(child.gameObject);
+                    }
+
+                    // Ngắt kết nối ngay lập tức khỏi Layout
+                    lettersContainer.DetachChildren();
+
+                    foreach (GameObject child in childrenToDestroy)
+                    {
+                        if (child != null)
+                        {
+                            // Tắt hoàn toàn tương tác để EventSystem/Raycast của Unity UI buông tha cho linh kiện Image
+                            child.SetActive(false);
+
+                            // Đổi tên để Unity không xếp nó vào hàng đợi sự kiện UI nữa
+                            child.name = "Destroyed_Letter";
+
+                            // Xóa hoãn lại một nhịp rất nhỏ để Unity UI kịp cập nhật trạng thái trống
+                            Destroy(child, 0.01f);
+                        }
                     }
 
                     // Tự động sinh lại các ô vuông chứa chữ cái bằng ảnh Pixel Art màu vàng vào Hàng 1
                     foreach (char letter in collectedLettersList)
                     {
-                        // Đúc quân chữ mẫu nhét thẳng vào khay chứa (Hàng 1)
                         GameObject newLetterUI = Instantiate(letterUIPrefab, lettersContainer);
 
                         // ÉP TỌA ĐỘ VÀ TỶ LỆ KÍCH THƯỚC VỀ CHUẨN
@@ -103,16 +148,16 @@ public class PlayerInventory : MonoBehaviour
                         }
 
                         // Gọi Helper đổi sang đúng chữ cái nhặt được dưới đất
-                        LetterUIHelper uiHelper = newLetterUI.GetComponent<LetterUIHelper>();
+                        LetterUIHelper uiHelper = newLetterUI.GetComponentInChildren<LetterUIHelper>();
                         if (uiHelper != null)
                         {
                             uiHelper.SetLetter(letter, letterSpriteData);
                         }
-                        DragItem drag = newLetterUI.GetComponent<DragItem>();
 
+                        DragItem drag = newLetterUI.GetComponent<DragItem>();
                         if (drag != null)
                         {
-                            drag.enabled = canSolveWord;
+                            drag.enabled = canSolveWord; // Dọc đường khóa kéo thả, chỉ khi ở Finish mới mở
                         }
                     }
 
@@ -128,8 +173,16 @@ public class PlayerInventory : MonoBehaviour
             }
             else
             {
+                Debug.Log("TogglePopup(false)");
+
                 targetPopupScale = Vector3.zero;
                 isAnimatingPopup = true;
+
+                // 🟢 GỌI HÀM MỞ KHÓA NHÂN VẬT GỌN GÀNG TỪ PLAYERMOVEMENT
+                if (playerMovement != null)
+                {
+                    playerMovement.UnlockPlayer();
+                }
             }
         }
         else
@@ -173,31 +226,31 @@ public class PlayerInventory : MonoBehaviour
     }
 
     // ========================================================
-    // KIỂM TRA ĐIỀU KIỆN KHI BẤM NÚT SUBMIT (ĐÃ SỬA LỖI QUÉT NHẦM)
+    // KIỂM TRA ĐIỀU KIỆN KHI BẤM NÚT SUBMIT
     // ========================================================
     public void OnSubmitButtonClicked()
     {
-        // 1. Tìm chính xác mục SlotsContainer chứa 6 ô vuông kết quả dựa trên vị trí của khay chứa cha
-        Transform boardTransform = lettersContainer.parent;
-        Transform slotsParent = boardTransform.Find("SlotsContainer");
         if (!canSolveWord)
         {
             if (statusText != null)
             {
                 statusText.text = "<color=yellow>Hãy đến cổng cuối màn để ghép chữ!</color>";
             }
-
             return;
         }
 
-        if (slotsParent == null)
+        List<DropSlot> activeSlots = new List<DropSlot>();
+
+        foreach (Transform child in slotsContainer)
         {
-            Debug.LogError("LỖI: Không tìm thấy đối tượng 'SlotsContainer' trên bảng gỗ!");
-            return;
+            DropSlot slot = child.GetComponent<DropSlot>();
+            if (slot != null)
+            {
+                activeSlots.Add(slot);
+            }
         }
 
-        // 2. Chỉ tìm các thành phần DropSlot nằm bên trong mục SlotsContainer này
-        DropSlot[] slots = slotsParent.GetComponentsInChildren<DropSlot>();
+        DropSlot[] slots = activeSlots.ToArray();
 
         if (slots.Length == 0)
         {
@@ -205,12 +258,10 @@ public class PlayerInventory : MonoBehaviour
             return;
         }
 
-        // 3. Sắp xếp các ô trống theo thứ tự từ trái qua phải trong Hierarchy
         System.Array.Sort(slots, (a, b) => a.transform.GetSiblingIndex().CompareTo(b.transform.GetSiblingIndex()));
 
         string playerWord = "";
 
-        // 4. Duyệt qua từng ô để kiểm tra chữ cái người chơi đã thả vào
         foreach (DropSlot slot in slots)
         {
             string letter = slot.GetLetter();
@@ -228,7 +279,6 @@ public class PlayerInventory : MonoBehaviour
 
         Debug.Log("Từ người chơi xếp được: " + playerWord);
 
-        // 5. So sánh kết quả với từ khóa mục tiêu (Ví dụ: ANIMAL)
         if (playerWord.ToUpper() == targetWord.ToUpper())
         {
             if (statusText != null)
@@ -247,15 +297,10 @@ public class PlayerInventory : MonoBehaviour
     {
         if (winPanel != null) winPanel.SetActive(true);
         if (playerMovement != null) playerMovement.FreezeOnWin();
-        Time.timeScale = 0f; // Dừng game chiến thắng
+        Time.timeScale = 0f;
         if (letterPopupPanel != null)
         {
-            // Cách 1: Tắt trực tiếp Object (Biến mất ngay tức thì)
             letterPopupPanel.SetActive(false);
-
-            // Cách 2: Nếu ông muốn nó dùng hiệu ứng thu nhỏ mượt mà của LateUpdate, hãy dùng 2 dòng dưới thay thế:
-            // targetPopupScale = Vector3.zero;
-            // isAnimatingPopup = true;
         }
     }
 
@@ -295,30 +340,28 @@ public class PlayerInventory : MonoBehaviour
             if (!HasCollectedAllLetters())
             {
                 Debug.Log("Bạn chưa nhặt đủ chữ!");
-
                 if (statusText != null)
                 {
                     statusText.text = "<color=yellow>Hãy nhặt đủ các chữ cái trước!</color>";
                 }
-
                 return;
             }
 
-            // Đã nhặt đủ chữ
-            Debug.Log("Đã nhặt đủ chữ, mở bảng ghép.");
-            Debug.Log("Nhân vật đã chạm vào LevelExit_Portal! Tự động mở bảng ghép chữ.");
+            Debug.Log("Đã nhặt đủ chữ, tiến hành khóa nhân vật và mở bảng ghép.");
             canSolveWord = true;
-            if (playerMovement != null)
-                playerMovement.LockPlayer();
-         
-            foreach (DragItem drag in FindObjectsOfType<DragItem>())
-    {
-        drag.enabled = true;
-    }
 
-
-            // Gọi hàm mở bảng gỗ lên ngay khi chạm cửa
+            // 1. Gọi mở bảng gỗ trước để kích hoạt LockPlayer() đóng băng nhân vật hoàn toàn
             TogglePopup(true);
+
+            // 2. Sau khi bảng đã dựng xong, mới kích hoạt tính năng kéo thả cho các quân chữ UI
+            DragItem[] allDragItems = FindObjectsOfType<DragItem>();
+            foreach (DragItem drag in allDragItems)
+            {
+                if (drag != null)
+                {
+                    drag.enabled = true;
+                }
+            }
         }
     }
 
@@ -329,10 +372,12 @@ public class PlayerInventory : MonoBehaviour
             if (playerHealth != null) playerHealth.TakeDamage(1);
         }
     }
+
     public bool CanSolveWord()
     {
         return canSolveWord;
     }
+
     private void UpdateScoreUI()
     {
         if (scoreText != null)
@@ -340,12 +385,13 @@ public class PlayerInventory : MonoBehaviour
             scoreText.text = "Coins: " + score;
         }
     }
+
     public void OnHintButtonClicked()
     {
         hintPanel.SetActive(true);
-
         hintText.text = "Mua gợi ý sẽ tốn " + hintCost + " Coin.\n\nBạn có muốn tiếp tục?";
     }
+
     public void OnHintOKClicked()
     {
         if (score < hintCost)
@@ -354,29 +400,75 @@ public class PlayerInventory : MonoBehaviour
             return;
         }
 
-        score -= hintCost;
-        UpdateScoreUI();
-
-        // Tìm tất cả các ô ghép chữ
-        DropSlot[] slots = FindObjectsOfType<DropSlot>();
-
-        // Sắp xếp theo thứ tự từ trái sang phải
-        System.Array.Sort(slots, (a, b) => a.transform.GetSiblingIndex().CompareTo(b.transform.GetSiblingIndex()));
-
-        for (int i = 0; i < targetWord.Length; i++)
+        if (currentHint >= 3)
         {
-            if (slots[i].GetLetter() != targetWord[i].ToString())
-            {
-                hintText.text = $"Gợi ý:\nChữ thứ {i + 1} là '{targetWord[i]}'";
-                return;
-            }
+            hintText.text = "Bạn đã sử dụng hết gợi ý!";
+            return;
         }
 
-        // Nếu tất cả đều đúng
-        hintText.text = "Bạn đã ghép đúng hết rồi!";
+        score -= hintCost;
+        UpdateScoreUI();
+        currentHint++;
+
+        switch (currentHint)
+        {
+            case 1:
+                hintText.text = hint1;
+                break;
+            case 2:
+                hintText.text = hint2;
+                break;
+            case 3:
+                hintText.text = hint3;
+                break;
+        }
     }
+
     public void CloseHintPanel()
     {
         hintPanel.SetActive(false);
+    }
+
+    private void CreateSlots()
+    {
+        if (slotsContainer == null || dropSlotPrefab == null)
+        {
+            Debug.LogError("Chưa gán SlotsContainer hoặc DropSlotPrefab!");
+            return;
+        }
+
+        if (slotsContainer != null)
+        {
+            List<GameObject> childrenToDestroy = new List<GameObject>();
+            foreach (Transform child in slotsContainer)
+            {
+                childrenToDestroy.Add(child.gameObject);
+            }
+
+            slotsContainer.DetachChildren();
+
+            foreach (GameObject child in childrenToDestroy)
+            {
+                if (child != null)
+                {
+                    child.SetActive(false);
+                    child.name = "Destroyed_Slot";
+                    Destroy(child, 0.01f);
+                }
+            }
+        }
+
+        for (int i = 0; i < targetWord.Length; i++)
+        {
+            GameObject slot = Instantiate(dropSlotPrefab, slotsContainer);
+            RectTransform rect = slot.GetComponent<RectTransform>();
+            if (rect != null)
+            {
+                rect.localScale = Vector3.one;
+                rect.localPosition = Vector3.zero;
+            }
+        }
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(slotsContainer.GetComponent<RectTransform>());
     }
 }

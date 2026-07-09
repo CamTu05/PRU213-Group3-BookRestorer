@@ -297,17 +297,30 @@ public class PlayerMovement : MonoBehaviour
     private bool isLocked = false;
 
     public void LockPlayer()
-{
-    isLocked = true;
-    horizontalInput = 0f;
-    rb.linearVelocity = Vector2.zero;
-
-    if (anim != null)
     {
-        anim.SetBool("IsRun", false);
-        anim.SetBool("IsCrouching", false);
-        anim.SetBool("IsLedgeGrab", false);
-        anim.SetFloat("VelocityY", 0);
+        isLocked = true;
+        horizontalInput = 0f;
+        rb.linearVelocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+
+        if (anim != null)
+        {
+            anim.SetBool("IsRun", false);
+            anim.SetBool("IsCrouching", false);
+            anim.SetBool("IsLedgeGrab", false);
+            anim.SetFloat("VelocityY", 0f);
+
+            anim.Play("Idle", 0, 0f);
+        }
     }
-}
+
+    public void UnlockPlayer()
+    {
+        isLocked = false;
+
+        if (rb != null)
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic;
+        }
+    }
 }
