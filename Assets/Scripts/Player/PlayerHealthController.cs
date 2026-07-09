@@ -1,29 +1,40 @@
+//chittp0807
+
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 [RequireComponent(typeof(Animator))]
 public class PlayerHealthController : MonoBehaviour
 {
     [Header("Health & UI Settings")]
     [SerializeField] private int maxHealth = 5;
-    [SerializeField] private Image healthBarFill; // Kéo ảnh màu thanh máu vào đây
+    [SerializeField] private Image healthBarFill; 
     [SerializeField] private float iframeDuration = 1.2f;
     [SerializeField] private GameObject gameOverText;
 
     [Header("Damage Settings (Chỉnh lượng máu trừ ở đây)")]
-    [SerializeField] private int enemyDamage = 1; // Quái cắn trừ mấy máu
-    [SerializeField] private int trapDamage = 2;  // Dẫm bẫy trừ mấy máu
+    [SerializeField] private int enemyDamage = 1; 
+    [SerializeField] private int trapDamage = 2;  
 
     private int currentHealth;
     private float iframeTimer;
+    private Rigidbody2D rb;
     private Animator anim;
     private PlayerMovement movement;
 
+    [Header("Knockback Settings")]
+    [SerializeField] private float knockbackDistance = 0.4f;
+    private SpriteRenderer spriteRenderer;
+    [Header("Knockback")]
+    [SerializeField] private float knockbackSpeed = 3f;
+    [SerializeField] private float knockbackDuration = 0.15f;
     private void Start()
     {
         anim = GetComponent<Animator>();
         movement = GetComponent<PlayerMovement>();
-
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        rb=GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         if (gameOverText != null) gameOverText.SetActive(false);
 
@@ -35,7 +46,7 @@ public class PlayerHealthController : MonoBehaviour
         if (iframeTimer > 0) iframeTimer -= Time.deltaTime;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, float knockbackDir)
     {
         if (iframeTimer > 0 || currentHealth <= 0) return;
 
@@ -44,10 +55,27 @@ public class PlayerHealthController : MonoBehaviour
 
         iframeTimer = iframeDuration;
 
-        if (anim != null) anim.SetTrigger("isHurt");
+        if (movement != null)
+        {
+            movement.LockPlayer();
 
-        if (currentHealth <= 0) Die();
+            movement.PushBack(
+                knockbackDir,
+                knockbackSpeed,
+                knockbackDuration
+            );
+        }
+        if (anim != null)
+            anim.SetTrigger("isHurt");
+        if (currentHealth <= 0)
+        {
+            Die();
+            return;
+        }
+
+        StartCoroutine(HurtCoroutine());
     }
+    
 
     private void UpdateHealthUI()
     {
@@ -57,21 +85,62 @@ public class PlayerHealthController : MonoBehaviour
 
     private void Die()
     {
-        if (gameOverText != null) gameOverText.SetActive(true);
-        if (movement != null) movement.FreezeOnDeath();
+        FindFirstObjectByType<MenuManager>()?.TriggerGameOver();
+
+        if (movement != null)
+            movement.FreezeOnDeath();
     }
 
-    // TỰ ĐỘNG TRỪ MÁU THEO TAG KHI VA CHẠM KHỐI CỨNG (Collision)
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy")) TakeDamage(enemyDamage);
-        else if (collision.gameObject.CompareTag("Trap")) TakeDamage(trapDamage);
-    }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            float dir = transform.position.x < collision.transform.position.x ? -1f : 1f;
 
-    // TỰ ĐỘNG TRỪ MÁU THEO TAG KHI ĐI XUYÊN QUA (Trigger)
+            TakeDamage(enemyDamage, dir);
+        }
+        else if (collision.gameObject.CompareTag("Trap"))
+        {
+            float dir = transform.localScale.x > 0 ? -1f : 1f;
+            TakeDamage(trapDamage, dir);
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy")) TakeDamage(enemyDamage);
-        else if (collision.CompareTag("Trap")) TakeDamage(trapDamage);
+        if (collision.CompareTag("Enemy"))
+        {
+            float dir = transform.position.x < collision.transform.position.x ? -1f : 1f;
+            TakeDamage(enemyDamage, dir);
+        }
+        else if (collision.CompareTag("Trap"))
+        {
+            float dir = transform.localScale.x > 0 ? -1f : 1f;
+            TakeDamage(trapDamage, dir);
+        }
+    }
+    private IEnumerator HurtCoroutine()
+    {
+        float totalLockTime = 1.0f;
+        float timer = 0f;
+
+        while (timer < iframeDuration)
+        {
+            spriteRenderer.color = new Color(1f, 0f, 0f, 0.6f);
+            yield return new WaitForSeconds(0.1f);
+
+            spriteRenderer.color = Color.white;
+            yield return new WaitForSeconds(0.1f);
+
+            timer += 0.2f;
+            if (timer >= totalLockTime && movement != null && currentHealth > 0)
+            {
+                movement.UnlockPlayer();
+            }
+        }
+
+        spriteRenderer.color = Color.white;
+
+        if (movement != null && currentHealth > 0)
+            movement.UnlockPlayer();
     }
 }

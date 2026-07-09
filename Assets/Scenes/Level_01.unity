@@ -1252,9 +1252,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 107413985}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: BackToMainMenu
+      - m_Target: {fileID: 881300608}
+        m_TargetAssemblyTypeName: SceneManagement, Assembly-CSharp
+        m_MethodName: GoHome
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4753,12 +4753,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 881300607}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 349.06122, y: 151.8816, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1082785132}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &887459150
 PrefabInstance:
@@ -5394,6 +5394,7 @@ Transform:
   - {fileID: 107413984}
   - {fileID: 2096487774}
   - {fileID: 649722762}
+  - {fileID: 881300609}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1083546193
@@ -6339,6 +6340,20 @@ MonoBehaviour:
   gameOverText: {fileID: 814689604}
   enemyDamage: 1
   trapDamage: 2
+  knockbackDistance: 50
+  knockbackSpeed: 1
+  knockbackDuration: 1
+--- !u!114 &1203171709 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7929922922298036512, guid: 7785c37fde7755b42826522c2a4a2fe3, type: 3}
+  m_PrefabInstance: {fileID: 1826273531}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203171700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3d27d0fd2cedf4d9be2d5e8843e353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
 --- !u!1 &1213228280
 GameObject:
   m_ObjectHideFlags: 0
@@ -24226,7 +24241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2011327547
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24718,8 +24733,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c407844fd320f324ab00367b095a2f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuManager
+  pm: {fileID: 1203171709}
   startPanel: {fileID: 0}
   pausePanel: {fileID: 1012469011}
+  gameOverPanel: {fileID: 814689604}
+  pauseButton: {fileID: 2142133820}
 --- !u!1 &2099107845 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4275916789620763998, guid: acb551d0796b15749a82a5c01c386975, type: 3}
@@ -25184,4 +25202,3 @@ SceneRoots:
   - {fileID: 1972675292}
   - {fileID: 1556834860}
   - {fileID: 1773962029}
-  - {fileID: 881300609}
