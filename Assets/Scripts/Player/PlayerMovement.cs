@@ -1,11 +1,13 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movement Settings")]
+    private Coroutine knockbackCoroutine; [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 9f;
     [SerializeField] private float jumpForce = 14f;
     [SerializeField] private float fallMultiplier = 3.5f;
@@ -77,6 +79,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        //chittp
+        if(Time.timeScale == 0f)
+        {
+            return;
+        }
+        //end
         if (isLocked)
         {
             horizontalInput = 0;
@@ -88,11 +96,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isLocked)
+        //chittp
+        if(Time.timeScale == 0f)
         {
-            rb.linearVelocity = Vector2.zero;
             return;
         }
+        //chittp
+        if (knockbackCoroutine != null)
+        {
+            return;
+        }
+        if (isLocked)
+        {
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y); // Giữ nhân vật đứng yên
+            return;
+        }
+        //end
         CheckGround();
         CheckLedge();
 
@@ -115,6 +134,10 @@ public class PlayerMovement : MonoBehaviour
     {
         var keyboard = Keyboard.current;
         var mouse = Mouse.current;
+        if (mouse != null && mouse.leftButton.wasPressedThisFrame && !EventSystem.current.IsPointerOverGameObject())
+        {
+            Attack();
+        }
         if (keyboard == null) return;
 
 
@@ -148,13 +171,7 @@ public class PlayerMovement : MonoBehaviour
         bool zPressed = keyboard.zKey.isPressed;
         wantsToClimb = shiftAndUp || zPressed;
 
-       
-        if (mouse != null && mouse.leftButton.wasPressedThisFrame)
-        {
-            Attack();
-        }
-
-   
+          
         if (keyboard.spaceKey.wasPressedThisFrame || keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed)
         {
             if (isGrounded)
@@ -325,14 +342,50 @@ public class PlayerMovement : MonoBehaviour
 {
     isLocked = true;
     horizontalInput = 0f;
-    rb.linearVelocity = Vector2.zero;
-
     if (anim != null)
     {
         anim.SetBool("IsRun", false);
         anim.SetBool("IsCrouching", false);
         anim.SetBool("IsLedgeGrab", false);
-        anim.SetFloat("VelocityY", 0);
     }
 }
+    //chittp
+    // Thay thế hàm PushBack và KnockbackRoutine cũ trong PlayerMovement.cs
+    public void PushBack(float dir, float speed, float duration)
+    {
+        if (knockbackCoroutine != null)
+            StopCoroutine(knockbackCoroutine);
+
+        knockbackCoroutine = StartCoroutine(KnockbackRoutine(dir, speed, duration));
+    }
+
+    private IEnumerator KnockbackRoutine(float dir, float speed, float duration)
+    {
+        float timer = 0f;
+
+        // Đẩy mạnh lên một chút để bứt ra khỏi bẫy
+        float horizontalForce = dir * speed;
+        // Cho nhân vật nảy nhẹ lên (khoảng 60% tốc độ đẩy) để thoát khỏi Collider của bẫy dưới đất
+        float verticalForce = speed * 0.6f;
+
+        while (timer < duration)
+        {
+            // Gán trực tiếp vận tốc liên tục để triệt tiêu mọi lực cản vật lý của bẫy trong thời gian ngắn
+            rb.linearVelocity = new Vector2(horizontalForce, verticalForce);
+
+            // Giảm dần lực nảy theo thời gian để trọng lực kéo xuống tự nhiên
+            verticalForce += Physics2D.gravity.y * Time.fixedDeltaTime;
+
+            timer += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+
+        // Kết thúc knockback, khựng lại một chút trước khi trả lại quyền điều khiển di chuyển
+        rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+        knockbackCoroutine = null;
+    }
+    public void UnlockPlayer()
+    {
+        isLocked = false;
+    }
 }

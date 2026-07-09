@@ -7,16 +7,33 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    //chittp
+    [SerializeField] private PlayerMovement pm;
+    //end
     [Header("UI Panels")]
     public GameObject startPanel;
-    public GameObject pausePanel; 
+    public GameObject pausePanel;
+    //c-0907
+    public GameObject gameOverPanel;
+    [Header("UI Elements")]
+    public GameObject pauseButton;
+    //end
 
     private static bool isRetrying = false;
+    //chittp-0907
+    private bool isGameOver = false;
+    //end
 
     private void Start()
     {
+        //chittp-0907
+        isGameOver = false;
+        //end
         if (pausePanel != null) pausePanel.SetActive(false);
-
+        //chittp
+        if (gameOverPanel != null) gameOverPanel.SetActive(false);
+        if (pauseButton != null) pauseButton.SetActive(true);
+        //end
         if (startPanel != null)
         {
             if (isRetrying)
@@ -48,11 +65,15 @@ public class MenuManager : MonoBehaviour
 
     public void PauseGame()
     {
+        Time.timeScale = 0f; 
+        //chittp-0907
+        if (isGameOver) return;
+        //end
         if (pausePanel != null)
         {
-            pausePanel.SetActive(true); 
+            pausePanel.SetActive(true);
         }
-        Time.timeScale = 0f; 
+       
     }
 
     public void ResumeGame()
@@ -63,4 +84,14 @@ public class MenuManager : MonoBehaviour
         }
         Time.timeScale = 1f; 
     }
+    //chittp-0907
+    public void TriggerGameOver()
+    {
+        isGameOver = true;
+        if (pm != null) pm.FreezeOnDeath();
+        if (pausePanel != null) pausePanel.SetActive(false);
+        if (gameOverPanel != null) gameOverPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+    //end
 }
