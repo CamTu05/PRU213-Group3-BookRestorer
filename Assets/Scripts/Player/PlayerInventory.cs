@@ -275,10 +275,10 @@ public class PlayerInventory : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-        if (collision.CompareTag("Trap"))
-        {
-            if (playerHealth != null) playerHealth.TakeDamage(1);
-        }
+        //if (collision.CompareTag("Trap"))
+        //{
+        //    if (playerHealth != null) playerHealth.TakeDamage(1);
+        //}
 
         if (collision.CompareTag("Letter"))
         {
@@ -322,13 +322,13 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Trap"))
-        {
-            if (playerHealth != null) playerHealth.TakeDamage(1);
-        }
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Trap"))
+    //    {
+    //        if (playerHealth != null) playerHealth.TakeDamage(1);
+    //    }
+    //}
     public bool CanSolveWord()
     {
         return canSolveWord;

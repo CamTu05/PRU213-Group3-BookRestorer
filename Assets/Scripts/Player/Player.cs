@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     [Header("Coin & UI Settings")]
     [SerializeField] private AudioClip coinSound;
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private GameObject gameOverText;
+    [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject winPanel;
 
     [Header("Health & Trap Settings")]
@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
         }
 
         currentHealth = maxHealth;
-        if (gameOverText != null) gameOverText.SetActive(false);
+        if (gameOverPanel != null) gameOverPanel.SetActive(false);
         if (winPanel != null) winPanel.SetActive(false);
         if (letterPopupPanel != null) letterPopupPanel.SetActive(false); // Tự động ẩn rương lúc đầu game
 
@@ -266,9 +266,9 @@ public class Player : MonoBehaviour
     private void Die()
     {
         Debug.Log("Player đã cạn máu!");
-        if (gameOverText != null)
+        if (gameOverPanel != null)
         {
-            gameOverText.SetActive(true);
+            gameOverPanel.SetActive(true);
         }
         horizontalInput = 0;
         rb.linearVelocity = Vector2.zero;
