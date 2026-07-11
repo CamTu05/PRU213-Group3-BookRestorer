@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Home_Screen.unity
     guid: a41168adc8601a2489aa59a2d88f01ce
   - enabled: 1
-    path: Assets/Scenes/Level_01.unity
+    path: Assets/Scenes/Level_01_Chi.unity
     guid: e864aa81816b2db40ba4fde5f7665ddd
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity

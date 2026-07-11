@@ -5,7 +5,20 @@ using System.Collections.Generic;
 
 [RequireComponent(typeof(AudioSource))]
 public class PlayerInventory : MonoBehaviour
+
 {
+    [Header("Hint Content")]
+
+    [TextArea(2, 4)]
+    [SerializeField] private string hint1;
+
+    [TextArea(2, 4)]
+    [SerializeField] private string hint2;
+
+    [TextArea(2, 4)]
+    [SerializeField] private string hint3;
+
+    private int currentHint = 0;
     [SerializeField] private GameObject hintPanel;
     [SerializeField] private TextMeshProUGUI hintText;
     [SerializeField] private int hintCost = 5;
@@ -13,13 +26,17 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private AudioClip coinSound;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject winPanel;
+    [SerializeField] private GameObject missingLetterPanel;
 
     [Header("Letter Drag & Drop System")]
     [SerializeField] private GameObject letterPopupPanel;         // Bảng gỗ lớn chứa UI
     [SerializeField] private string targetWord = "ANIMAL";         // Từ khóa cần hoàn thành
     [SerializeField] private GameObject letterUIPrefab;           // File Prefab quân chữ (màu xanh dưới Project)
-    [SerializeField] private Transform lettersContainer;          // Hàng 1: Nơi chứa các chữ nhặt được lộn xộn (UI_Letters_Row)
-    [SerializeField] private TextMeshProUGUI statusText;           // Text hiển thị kết quả (Wrong! / Correct!) bên dưới nút Submit
+    [SerializeField] private Transform lettersContainer;
+    [SerializeField] private Transform slotsContainer;
+    [SerializeField] private GameObject dropSlotPrefab;// Hàng 1: Nơi chứa các chữ nhặt được lộn xộn (UI_Letters_Row)
+    [SerializeField] private TextMeshProUGUI statusText;
+    [SerializeField] private GameObject submitButton;// Text hiển thị kết quả (Wrong! / Correct!) bên dưới nút Submit
 
     [Header("Sprite Font Settings")]
     [SerializeField] private LetterSpriteData letterSpriteData; // Kho lưu trữ ảnh chữ cái ScriptableObject
@@ -44,7 +61,11 @@ public class PlayerInventory : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
 
         if (winPanel != null) winPanel.SetActive(false);
+
         if (letterPopupPanel != null) letterPopupPanel.SetActive(false);
+
+        if (missingLetterPanel != null)
+            missingLetterPanel.SetActive(false);
 
         UpdateScoreUI();
     }
@@ -60,25 +81,23 @@ public class PlayerInventory : MonoBehaviour
             {
                 letterPopupPanel.SetActive(true);
 
-                // 1. Reset dòng chữ thông báo kết quả về trống khi mở bảng
-                if (statusText != null) statusText.text = "";
-
-
-                // 2. [SỬA LỖI QUAN TRỌNG]: Tìm và xóa sạch tất cả các quân chữ cũ còn sót lại trong các ô vuông gỗ (SlotsContainer)
-                Transform boardTransform = lettersContainer.parent;
-                Transform slotsParent = boardTransform.Find("SlotsContainer");
-                if (slotsParent != null)
+                if (canSolveWord)
                 {
-                    // Duyệt qua từng ô vuông gỗ con
-                    foreach (Transform slot in slotsParent)
-                    {
-                        // Nếu trong ô vuông gỗ đó có chứa quân chữ cái cũ, xóa nó ngay lập tức
-                        foreach (Transform child in slot)
-                        {
-                            Destroy(child.gameObject);
-                        }
-                    }
+                    slotsContainer.gameObject.SetActive(true);
+
+                    if (submitButton != null)
+                        submitButton.SetActive(true);
+
+                    CreateSlots();
                 }
+                else
+                {
+                    slotsContainer.gameObject.SetActive(false);
+
+                    if (submitButton != null)
+                        submitButton.SetActive(false);
+                }
+
 
                 // 3. HÀNG 1: Xóa sạch các quân chữ UI cũ trên khay chứa lộn xộn để làm mới dữ liệu
                 if (lettersContainer != null)
@@ -178,32 +197,21 @@ public class PlayerInventory : MonoBehaviour
     public void OnSubmitButtonClicked()
     {
         // 1. Tìm chính xác mục SlotsContainer chứa 6 ô vuông kết quả dựa trên vị trí của khay chứa cha
-        Transform boardTransform = lettersContainer.parent;
-        Transform slotsParent = boardTransform.Find("SlotsContainer");
-        if (!canSolveWord)
+        List<DropSlot> activeSlots = new List<DropSlot>();
+
+        foreach (Transform child in slotsContainer)
         {
-            if (statusText != null)
+            DropSlot slot = child.GetComponent<DropSlot>();
+
+            if (slot != null)
             {
-                statusText.text = "<color=yellow>Hãy đến cổng cuối màn để ghép chữ!</color>";
+                activeSlots.Add(slot);
             }
-
-            return;
         }
 
-        if (slotsParent == null)
-        {
-            Debug.LogError("LỖI: Không tìm thấy đối tượng 'SlotsContainer' trên bảng gỗ!");
-            return;
-        }
+        DropSlot[] slots = activeSlots.ToArray();
 
-        // 2. Chỉ tìm các thành phần DropSlot nằm bên trong mục SlotsContainer này
-        DropSlot[] slots = slotsParent.GetComponentsInChildren<DropSlot>();
-
-        if (slots.Length == 0)
-        {
-            Debug.LogError("LỖI: Không tìm thấy linh kiện DropSlot nào trong SlotsContainer!");
-            return;
-        }
+ 
 
         // 3. Sắp xếp các ô trống theo thứ tự từ trái qua phải trong Hierarchy
         System.Array.Sort(slots, (a, b) => a.transform.GetSiblingIndex().CompareTo(b.transform.GetSiblingIndex()));
@@ -294,11 +302,9 @@ public class PlayerInventory : MonoBehaviour
         {
             if (!HasCollectedAllLetters())
             {
-                Debug.Log("Bạn chưa nhặt đủ chữ!");
-
-                if (statusText != null)
+                if (missingLetterPanel != null)
                 {
-                    statusText.text = "<color=yellow>Hãy nhặt đủ các chữ cái trước!</color>";
+                    missingLetterPanel.SetActive(true);
                 }
 
                 return;
@@ -354,29 +360,73 @@ public class PlayerInventory : MonoBehaviour
             return;
         }
 
+        if (currentHint >= 3)
+        {
+            hintText.text = "Bạn đã sử dụng hết gợi ý!";
+            return;
+        }
+
         score -= hintCost;
         UpdateScoreUI();
 
-        // Tìm tất cả các ô ghép chữ
-        DropSlot[] slots = FindObjectsOfType<DropSlot>();
+        currentHint++;
 
-        // Sắp xếp theo thứ tự từ trái sang phải
-        System.Array.Sort(slots, (a, b) => a.transform.GetSiblingIndex().CompareTo(b.transform.GetSiblingIndex()));
-
-        for (int i = 0; i < targetWord.Length; i++)
+        switch (currentHint)
         {
-            if (slots[i].GetLetter() != targetWord[i].ToString())
-            {
-                hintText.text = $"Gợi ý:\nChữ thứ {i + 1} là '{targetWord[i]}'";
-                return;
-            }
-        }
+            case 1:
+                hintText.text = hint1;
+                break;
 
-        // Nếu tất cả đều đúng
-        hintText.text = "Bạn đã ghép đúng hết rồi!";
+            case 2:
+                hintText.text = hint2;
+                break;
+
+            case 3:
+                hintText.text = hint3;
+                break;
+        }
     }
     public void CloseHintPanel()
     {
         hintPanel.SetActive(false);
     }
+    private void CreateSlots()
+    {
+        if (slotsContainer == null || dropSlotPrefab == null)
+        {
+            Debug.LogError("Chưa gán SlotsContainer hoặc DropSlotPrefab!");
+            return;
+        }
+
+        // Xóa Slot cũ
+        foreach (Transform child in slotsContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Tạo Slot mới
+        for (int i = 0; i < targetWord.Length; i++)
+        {
+            GameObject slot = Instantiate(dropSlotPrefab, slotsContainer);
+
+            RectTransform rect = slot.GetComponent<RectTransform>();
+
+            if (rect != null)
+            {
+                rect.localScale = Vector3.one;
+                rect.localPosition = Vector3.zero;
+            }
+        }
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(
+            slotsContainer.GetComponent<RectTransform>());
+    }
+    public void CloseMissingLetterPanel()
+    {
+        if (missingLetterPanel != null)
+        {
+            missingLetterPanel.SetActive(false);
+        }
+    }
+
 }
