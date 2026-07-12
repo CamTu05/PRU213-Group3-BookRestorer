@@ -15,5 +15,5 @@ MonoBehaviour:
   levelId: jungle_1
   levelNumber: 1
   levelName: Level 01
-  sceneName: Level_01
+  sceneName: Jungle_Level_01
   previewImage: {fileID: 0}

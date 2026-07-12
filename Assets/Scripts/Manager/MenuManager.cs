@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -12,7 +12,10 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject coin ;
     [SerializeField] private GameObject popUpLetter;
     [SerializeField] private GameObject winPanel;
-    
+
+    [Header("Level Information")]
+    [SerializeField] private BookData currentBook;
+    [SerializeField] private int levelNumber;
 
 
     private bool isGameOver;
@@ -73,6 +76,11 @@ public class MenuManager : MonoBehaviour
     {
         if (isGameOver) return;
 
+        if (GameProgressManager.Instance != null)
+        {
+            GameProgressManager.Instance.CompleteLevel(currentBook.bookId, levelNumber);
+        }
+
         inventory?.SetActive(false);
         healthBar?.SetActive(false);
         coin?.SetActive(false);
@@ -81,6 +89,27 @@ public class MenuManager : MonoBehaviour
         winPanel?.SetActive(true);
 
         Time.timeScale = 0f;
+    }
+
+    public void NextLevel()
+    {
+        Time.timeScale = 1f;
+
+        if (currentBook == null)
+        {
+            Debug.LogError("MenuManager: Current Book chưa được config.");
+            return;
+        }
+
+        LevelData nextLevel = GameProgressManager.Instance.GetNextLevel(currentBook);
+
+        if (nextLevel == null || string.IsNullOrEmpty(nextLevel.sceneName))
+        {
+            Debug.LogError("MenuManager: Không tìm thấy level tiếp theo.");
+            return;
+        }
+
+        SceneManager.LoadScene(nextLevel.sceneName);
     }
 
 }

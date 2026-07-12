@@ -34,22 +34,25 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // Phát nhạc nền.
-    public void PlayMusic(AudioClip clip)
+    // Phát nhạc nền, nếu đang phát đúng clip thì không phát lại.
+    public void PlayMusic(AudioClip clip, float volumeScale = 1f)
     {
         if (clip == null || musicSource == null) return;
 
+        if (musicSource.clip == clip && musicSource.isPlaying) return;
+
         musicSource.clip = clip;
         musicSource.loop = true;
+        musicSource.volume = volumeScale;
         musicSource.Play();
     }
 
     // Phát hiệu ứng âm thanh.
-    public void PlaySFX(AudioClip clip)
+    public void PlaySFX(AudioClip clip, float volumeScale = 1f)
     {
         if (clip == null || sfxSource == null) return;
 
-        sfxSource.PlayOneShot(clip);
+        sfxSource.PlayOneShot(clip, volumeScale);
     }
 
     // Set âm lượng nhạc nền.
