@@ -56,6 +56,10 @@ public class MenuManager : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f;
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ResetCheckpoint();
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
