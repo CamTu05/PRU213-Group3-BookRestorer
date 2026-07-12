@@ -18,8 +18,17 @@ MonoBehaviour:
   m_PlatformId: 4e3c793746204150860bf175a9a41a05
   m_PlatformBuildProfile:
     rid: 1514862258645106758
-  m_OverrideGlobalSceneList: 0
-  m_Scenes: []
+  m_OverrideGlobalSceneList: 1
+  m_Scenes:
+  - m_enabled: 1
+    m_path: Assets/Scenes/MainMenu.unity
+    m_guid: 0f7817b756ac13b4bbbdda1325ca3a49
+  - m_enabled: 1
+    m_path: Assets/Scenes/Jungle_Level_01.unity
+    m_guid: 7d99efcea9234fb4f82a94d0c247ad9c
+  - m_enabled: 1
+    m_path: Assets/Scenes/Jungle_Level_02.unity
+    m_guid: 16cffc52acc00bc4992dfed5f849f230
   m_HasScriptingDefines: 0
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:

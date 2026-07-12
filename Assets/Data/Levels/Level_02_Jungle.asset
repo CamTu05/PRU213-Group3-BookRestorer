@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 363f1c34cbfa2ac44b71fec3459f339f, type: 3}
-  m_Name: Level_02
+  m_Name: Level_02_Jungle
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   levelId: jungle_2
   levelNumber: 2
   levelName: Level 02
-  sceneName: 
+  sceneName: Jungle_Level_02
   previewImage: {fileID: 0}
