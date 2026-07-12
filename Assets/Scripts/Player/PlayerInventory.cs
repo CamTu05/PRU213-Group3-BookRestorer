@@ -53,7 +53,7 @@ public class PlayerInventory : MonoBehaviour
     private PlayerMovement playerMovement;
     private int score = 0;
     private bool canSolveWord = false;
-
+    [SerializeField] private MenuManager menuManager;
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -253,20 +253,21 @@ public class PlayerInventory : MonoBehaviour
 
     private void ShowWinPanel()
     {
-        if (winPanel != null) winPanel.SetActive(true);
-        if (playerMovement != null) playerMovement.FreezeOnWin();
-        Time.timeScale = 0f; // Dừng game chiến thắng
+        if (menuManager != null)
+        {
+            menuManager.TriggerWin();
+        }
+
+        if (playerMovement != null)
+        {
+            playerMovement.FreezeOnWin();
+        }
+
         if (letterPopupPanel != null)
         {
-            // Cách 1: Tắt trực tiếp Object (Biến mất ngay tức thì)
             letterPopupPanel.SetActive(false);
-
-            // Cách 2: Nếu ông muốn nó dùng hiệu ứng thu nhỏ mượt mà của LateUpdate, hãy dùng 2 dòng dưới thay thế:
-            // targetPopupScale = Vector3.zero;
-            // isAnimatingPopup = true;
         }
     }
-
     // ========================================================
     // XỬ LÝ VA CHẠM TRIGGER
     // ========================================================

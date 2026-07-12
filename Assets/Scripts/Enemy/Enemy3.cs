@@ -94,4 +94,6 @@ public class Enemy3 : Enemy
         scaler.x *= -1;
         transform.localScale = scaler;
     }
+
+    
 }
