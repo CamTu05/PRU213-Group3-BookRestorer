@@ -12,7 +12,7 @@ public class KillZone : MonoBehaviour
         {
             Debug.Log("Player đã rơi xuống vực!");
 
-            Player playerScript = collision.GetComponent<Player>();
+            PlayerHealth playerScript = collision.GetComponent<PlayerHealth>();
             if (playerScript != null) 
             {
                 playerScript.TakeDamage(1); 
