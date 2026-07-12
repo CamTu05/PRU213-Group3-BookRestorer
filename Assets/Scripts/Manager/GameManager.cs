@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     private Vector2 respawnPosition;
+    private Vector2 defaultSpawnPosition;
 
     void Awake()
     {
@@ -29,10 +30,29 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        SaveDefaultPosition();
+        //GameObject player = GameObject.FindGameObjectWithTag("Player");
+        //if (player != null)
+        //{
+        //    respawnPosition = player.transform.position;
+        //}
+    }
+
+    private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
+    private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SaveDefaultPosition();
+    }
+
+    private void SaveDefaultPosition()
+    {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            respawnPosition = player.transform.position;
+            defaultSpawnPosition = player.transform.position;
+            respawnPosition = defaultSpawnPosition; // Mặc định điểm hồi sinh ban đầu là điểm đầu game
+            Debug.Log("GameManager: Đã ghi nhớ điểm ĐẦU GAME gốc tại: " + defaultSpawnPosition);
         }
     }
 
@@ -60,5 +80,11 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("Home_Screen");
+    }
+
+    public void ResetCheckpoint()
+    {
+        respawnPosition = defaultSpawnPosition;
+        Debug.Log("GameManager: Đã xóa Checkpoint cũ, đưa vị trí hồi sinh về điểm ĐẦU GAME gốc: " + defaultSpawnPosition);
     }
 }
