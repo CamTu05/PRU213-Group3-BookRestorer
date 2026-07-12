@@ -80,7 +80,7 @@ public class Enemy5 : Enemy
         Collider2D hitPlayer = Physics2D.OverlapCircle(attackPoint.position, attackRange, playerLayer);
         if (hitPlayer != null)
         {
-            PlayerHealthController health = hitPlayer.GetComponent<PlayerHealthController>();
+            PlayerHealth health = hitPlayer.GetComponent<PlayerHealth>();
             if (health != null)
             {
                 health.TakeDamage(1);
