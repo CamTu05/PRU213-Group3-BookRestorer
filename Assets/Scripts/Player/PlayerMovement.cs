@@ -133,12 +133,13 @@ public class PlayerMovement : MonoBehaviour
     private void HandleInput()
     {
         var keyboard = Keyboard.current;
-        var mouse = Mouse.current;
-        if (mouse != null && mouse.leftButton.wasPressedThisFrame && !EventSystem.current.IsPointerOverGameObject())
+        var mouse = Mouse.current;        
+        if (keyboard == null) return;
+
+        if (keyboard.spaceKey.wasPressedThisFrame || mouse != null && mouse.leftButton.wasPressedThisFrame && !EventSystem.current.IsPointerOverGameObject())
         {
             Attack();
         }
-        if (keyboard == null) return;
 
 
         horizontalInput = 0f;
@@ -151,28 +152,20 @@ public class PlayerMovement : MonoBehaviour
             FlipController();
         }
 
-     
+        isCrouching = isGrounded &&
+                  !isLedgeGrabbing &&
+                  (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed);
+
+        wantsToClimb = keyboard.shiftKey.isPressed;
         verticalInput = 0f;
-        if (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed) verticalInput = 1f;
-        if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed) verticalInput = -1f;
-
-       
-        if (isGrounded && !isLedgeGrabbing && (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed))
+        if (isLedgeGrabbing &&
+            (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed))
         {
-            isCrouching = true;
-        }
-        else
-        {
-            isCrouching = false;
+            verticalInput = 1f;
         }
 
-  
-        bool shiftAndUp = keyboard.shiftKey.isPressed;
-        bool zPressed = keyboard.zKey.isPressed;
-        wantsToClimb = shiftAndUp || zPressed;
-
-          
-        if (keyboard.spaceKey.wasPressedThisFrame || keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed)
+        if (keyboard.wKey.wasPressedThisFrame ||
+        keyboard.upArrowKey.wasPressedThisFrame)
         {
             if (isGrounded)
             {
@@ -184,9 +177,11 @@ public class PlayerMovement : MonoBehaviour
                 isLedgeGrabbing = false;
                 rb.gravityScale = 3f;
 
-              
                 float jumpDirection = isFacingRight ? -1f : 1f;
-                rb.linearVelocity = new Vector2(jumpDirection * moveSpeed * 0.8f, ledgeJumpForce);
+
+                rb.linearVelocity = new Vector2(
+                    jumpDirection * moveSpeed * 0.8f,
+                    ledgeJumpForce);
             }
         }
     }

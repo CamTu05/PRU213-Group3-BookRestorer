@@ -532,6 +532,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: IsRun
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsGrounded
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1048176141735410390}
   m_Solo: 0
@@ -759,7 +762,7 @@ AnimatorStateMachine:
     m_Position: {x: 400, y: -540, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4279407403099828132}
-    m_Position: {x: 400, y: -450, z: 0}
+    m_Position: {x: 410, y: -450, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7461439414280916368}
     m_Position: {x: 30, y: -290, z: 0}
@@ -888,9 +891,6 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: IsLedgeGrab
-    m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: ClimbSpeed
     m_EventTreshold: 1

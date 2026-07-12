@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.Cinemachine;
 
 public class Spikes : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class Spikes : MonoBehaviour
     public AudioSource trapAudioSource;
 
     [Header("Cấu Hình Hậu Quả")]
+    public int damage = 3;
     public float knockbackForceX = 2f;
     public float knockbackForceY = 5f;
     public float flashDuration = 1.5f;
@@ -22,9 +24,9 @@ public class Spikes : MonoBehaviour
             return;
 
         float dir = other.transform.position.x > transform.position.x ? 1f : -1f;
-
-        other.GetComponent<PlayerHealthController>()
-             ?.TakeDamage(1, dir);
+        Debug.Log("Spike gọi TakeDamage(3)");
+        other.GetComponent<PlayerHealth>()
+             ?.TakeDamage(damage, dir);
 
         trapAudioSource.Play();
     }
