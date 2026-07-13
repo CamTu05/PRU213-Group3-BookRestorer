@@ -23,7 +23,6 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private TextMeshProUGUI hintText;
     [SerializeField] private int hintCost = 5;
     [Header("Coin & UI Settings")]
-    [SerializeField] private AudioClip coinSound;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject missingLetterPanel;
@@ -275,10 +274,7 @@ public class PlayerInventory : MonoBehaviour
     {
         if (collision.CompareTag("Coin"))
         {
-            //if (audioSource != null && coinSound != null)
-            //{
-            //    AudioManager.Instance.PlaySFX(coinSound);
-            //}
+          
             score++;
             UpdateScoreUI();
             Destroy(collision.gameObject);

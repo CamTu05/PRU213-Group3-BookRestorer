@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     [Header("Coin & UI Settings")]
-    [SerializeField] private AudioClip coinSound;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject winPanel;
@@ -345,10 +344,7 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Coin"))
         {
-            if (audioSource != null && coinSound != null)
-            {
-                audioSource.PlayOneShot(coinSound);
-            }
+           
             score++;
             UpdateScoreUI();
             Destroy(collision.gameObject);
