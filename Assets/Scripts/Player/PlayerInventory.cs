@@ -275,10 +275,10 @@ public class PlayerInventory : MonoBehaviour
     {
         if (collision.CompareTag("Coin"))
         {
-            if (audioSource != null && coinSound != null)
-            {
-                AudioManager.Instance.PlaySFX(coinSound);
-            }
+            //if (audioSource != null && coinSound != null)
+            //{
+            //    AudioManager.Instance.PlaySFX(coinSound);
+            //}
             score++;
             UpdateScoreUI();
             Destroy(collision.gameObject);
