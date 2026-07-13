@@ -3,7 +3,6 @@ using TMPro;
 using UnityEngine.UI; // Dùng để xử lý LayoutRebuilder ép đồng bộ UI khay chứa
 using System.Collections.Generic;
 
-[RequireComponent(typeof(AudioSource))]
 public class PlayerInventory : MonoBehaviour
 
 {
