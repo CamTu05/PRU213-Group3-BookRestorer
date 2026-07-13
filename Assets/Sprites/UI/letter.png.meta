@@ -316,7 +316,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_0"
+      name: A
       rect:
         serializedVersion: 2
         x: 65
@@ -338,7 +338,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_1"
+      name: H
       rect:
         serializedVersion: 2
         x: 60
@@ -360,7 +360,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_2"
+      name: Q
       rect:
         serializedVersion: 2
         x: 151
@@ -382,7 +382,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_3"
+      name: I
       rect:
         serializedVersion: 2
         x: 239
@@ -404,7 +404,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_4"
+      name: B
       rect:
         serializedVersion: 2
         x: 284
@@ -426,7 +426,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_5"
+      name: J
       rect:
         serializedVersion: 2
         x: 326
@@ -448,7 +448,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_6"
+      name: S
       rect:
         serializedVersion: 2
         x: 460
@@ -470,7 +470,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_7"
+      name: K
       rect:
         serializedVersion: 2
         x: 470
@@ -492,7 +492,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_8"
+      name: C
       rect:
         serializedVersion: 2
         x: 475
@@ -514,7 +514,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_9"
+      name: T
       rect:
         serializedVersion: 2
         x: 623
@@ -536,7 +536,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_10"
+      name: L
       rect:
         serializedVersion: 2
         x: 623
@@ -558,7 +558,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_11"
+      name: D
       rect:
         serializedVersion: 2
         x: 703
@@ -580,7 +580,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_12"
+      name: M
       rect:
         serializedVersion: 2
         x: 771
@@ -602,7 +602,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_13"
+      name: E
       rect:
         serializedVersion: 2
         x: 921
@@ -624,7 +624,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_14"
+      name: V
       rect:
         serializedVersion: 2
         x: 928
@@ -646,7 +646,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_15"
+      name: N
       rect:
         serializedVersion: 2
         x: 956
@@ -668,7 +668,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_16"
+      name: F
       rect:
         serializedVersion: 2
         x: 1125
@@ -690,7 +690,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_17"
+      name: W
       rect:
         serializedVersion: 2
         x: 1071
@@ -712,7 +712,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_18"
+      name: O
       rect:
         serializedVersion: 2
         x: 1133
@@ -734,7 +734,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_19"
+      name: X
       rect:
         serializedVersion: 2
         x: 1263
@@ -756,7 +756,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_20"
+      name: P
       rect:
         serializedVersion: 2
         x: 1295
@@ -778,7 +778,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_21"
+      name: G
       rect:
         serializedVersion: 2
         x: 1311
@@ -800,7 +800,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_22"
+      name: R
       rect:
         serializedVersion: 2
         x: 317
@@ -844,7 +844,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_24"
+      name: Y
       rect:
         serializedVersion: 2
         x: 703
@@ -866,7 +866,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_25"
+      name: U
       rect:
         serializedVersion: 2
         x: 765
@@ -888,7 +888,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u1EF3cfxzfhg_26"
+      name: Z
       rect:
         serializedVersion: 2
         x: 863
@@ -1935,30 +1935,36 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u1EF3cfxzfhg_0": 2140742546967694334
-      "\u1EF3cfxzfhg_1": -4193134406600451401
-      "\u1EF3cfxzfhg_10": -5193188128714799449
-      "\u1EF3cfxzfhg_11": -805146096193575587
-      "\u1EF3cfxzfhg_12": 850870312854468564
-      "\u1EF3cfxzfhg_13": -7120817706847455242
-      "\u1EF3cfxzfhg_14": -8576838814908742131
-      "\u1EF3cfxzfhg_15": -278554157157428296
-      "\u1EF3cfxzfhg_16": -1192546077312915801
-      "\u1EF3cfxzfhg_17": 8083420082562405123
-      "\u1EF3cfxzfhg_18": 166676114155834467
-      "\u1EF3cfxzfhg_19": -2240673205248819950
-      "\u1EF3cfxzfhg_2": 1908880635955362668
-      "\u1EF3cfxzfhg_20": -3818735286021609070
-      "\u1EF3cfxzfhg_21": 6930403378967941158
-      "\u1EF3cfxzfhg_22": -1128299455123691637
+      A: 2140742546967694334
+      B: -1373624916770898127
+      C: -9091934553578572598
+      D: -805146096193575587
+      E: -7120817706847455242
+      F: -1192546077312915801
+      G: 6930403378967941158
+      H: -4193134406600451401
+      I: 430550783196928764
+      J: -51137448852511224
+      K: -3462418750489208506
+      L: -5193188128714799449
+      M: 850870312854468564
+      N: -278554157157428296
+      O: 166676114155834467
+      P: -3818735286021609070
+      Q: 1908880635955362668
+      R: -1128299455123691637
+      S: -5984420725317067792
+      T: -6996275642296597568
+      U: 526025795924417022
+      V: -8576838814908742131
+      W: 8083420082562405123
+      X: -2240673205248819950
+      Y: -652192163073892585
+      Z: 7281023922839424203
       "\u1EF3cfxzfhg_23": -1263708108569407328
-      "\u1EF3cfxzfhg_24": -652192163073892585
-      "\u1EF3cfxzfhg_25": 526025795924417022
-      "\u1EF3cfxzfhg_26": 7281023922839424203
       "\u1EF3cfxzfhg_27": 4371958750239509933
       "\u1EF3cfxzfhg_28": 8063578223268634005
       "\u1EF3cfxzfhg_29": -2709411020069090313
-      "\u1EF3cfxzfhg_3": 430550783196928764
       "\u1EF3cfxzfhg_30": 8749109495448296944
       "\u1EF3cfxzfhg_31": 2203211407668016499
       "\u1EF3cfxzfhg_32": -2962570069952731389
@@ -1969,7 +1975,6 @@ TextureImporter:
       "\u1EF3cfxzfhg_37": 166587241498812057
       "\u1EF3cfxzfhg_38": 3580501699337484718
       "\u1EF3cfxzfhg_39": -691376366103795291
-      "\u1EF3cfxzfhg_4": -1373624916770898127
       "\u1EF3cfxzfhg_40": 1100600900823722495
       "\u1EF3cfxzfhg_41": -4214560665309081440
       "\u1EF3cfxzfhg_42": 8361332447743495506
@@ -1980,7 +1985,6 @@ TextureImporter:
       "\u1EF3cfxzfhg_47": 7639333824447604739
       "\u1EF3cfxzfhg_48": 6391264642641935547
       "\u1EF3cfxzfhg_49": 5355886763642014619
-      "\u1EF3cfxzfhg_5": -51137448852511224
       "\u1EF3cfxzfhg_50": -7868969870767892518
       "\u1EF3cfxzfhg_51": 6180975740444066737
       "\u1EF3cfxzfhg_52": -8320082402858230636
@@ -1991,7 +1995,6 @@ TextureImporter:
       "\u1EF3cfxzfhg_57": 1114746714956011766
       "\u1EF3cfxzfhg_58": 6720859372288590554
       "\u1EF3cfxzfhg_59": -3767874887196154644
-      "\u1EF3cfxzfhg_6": -5984420725317067792
       "\u1EF3cfxzfhg_60": 6629742787875675569
       "\u1EF3cfxzfhg_61": 388618708547498020
       "\u1EF3cfxzfhg_62": -7926183291320263543
@@ -2002,12 +2005,9 @@ TextureImporter:
       "\u1EF3cfxzfhg_67": 9029148362262417952
       "\u1EF3cfxzfhg_68": -5319431472588896921
       "\u1EF3cfxzfhg_69": 1786247158068624714
-      "\u1EF3cfxzfhg_7": -3462418750489208506
       "\u1EF3cfxzfhg_70": 1128433574385453176
       "\u1EF3cfxzfhg_71": -894342847905413831
       "\u1EF3cfxzfhg_72": 4684224666100667341
-      "\u1EF3cfxzfhg_8": -9091934553578572598
-      "\u1EF3cfxzfhg_9": -6996275642296597568
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
