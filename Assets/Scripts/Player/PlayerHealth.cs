@@ -1,6 +1,6 @@
 //chittp0807
 
-
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -14,7 +14,10 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float iframeDuration = 1.2f;
     [SerializeField] private GameObject gameOverPanel;
 
-  
+    [SerializeField] private TMP_Text damageText;
+    [SerializeField] private float damageTextDuration = 1f;
+    [SerializeField] private TMP_Text hpText;
+    private Coroutine damageRoutine;
 
     private int currentHealth;
     private float iframeTimer;
@@ -28,6 +31,9 @@ public class PlayerHealth : MonoBehaviour
     [Header("Knockback")]
     [SerializeField] private float knockbackSpeed = 3f;
     [SerializeField] private float knockbackDuration = 0.15f;
+    //chittp1507
+    [SerializeField] private AudioClip hurtSFX;
+    [SerializeField] private AudioClip deathSFX;
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -51,8 +57,9 @@ public class PlayerHealth : MonoBehaviour
 
         if (iframeTimer > 0 || currentHealth <= 0) return;
         currentHealth -= damage;
+        AudioManager.Instance.PlaySFX(hurtSFX);
         Debug.Log($"Frame={Time.frameCount} | HP sau={currentHealth}");
-
+        ShowDamage(damage);
         UpdateHealthUI();
 
         iframeTimer = iframeDuration;
@@ -93,12 +100,16 @@ public class PlayerHealth : MonoBehaviour
 
     private void UpdateHealthUI()
     {
-        if (healthBarFill == null) return;
-        healthBarFill.fillAmount = (float)currentHealth / maxHealth;
+        if (healthBarFill != null)
+            healthBarFill.fillAmount = (float)currentHealth / maxHealth;
+
+        if (hpText != null)
+            hpText.text = $"{currentHealth}/{maxHealth}";
     }
 
     private void Die()
     {
+        AudioManager.Instance.PlaySFX(deathSFX);
         FindAnyObjectByType<MenuManager>()?.TriggerGameOver();
 
         if (movement != null)
@@ -126,5 +137,25 @@ public class PlayerHealth : MonoBehaviour
 
         if (movement != null && currentHealth > 0)
             movement.UnlockPlayer();
+    }
+    //chittp 1507
+    private void ShowDamage(int damage)
+    {
+        if (damageText == null) return;
+
+        if (damageRoutine != null)
+            StopCoroutine(damageRoutine);
+
+        damageRoutine = StartCoroutine(ShowDamageCoroutine(damage));
+    }
+
+    private IEnumerator ShowDamageCoroutine(int damage)
+    {
+        damageText.gameObject.SetActive(true);
+        damageText.text = "-" + damage;
+
+        yield return new WaitForSeconds(damageTextDuration);
+
+        damageText.gameObject.SetActive(false);
     }
 }
