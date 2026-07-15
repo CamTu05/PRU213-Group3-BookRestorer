@@ -60,7 +60,12 @@ public class PlayerMovement : MonoBehaviour
     //ChiTTP_Getter cho trangj thai cui
     public bool IsCrouching => isCrouching;
     //end
-
+    //chittp1507
+    [SerializeField] private AudioClip stepSFX;
+    [SerializeField] private AudioClip jumpSFX;
+    [SerializeField] private AudioClip landingSFX;
+    [SerializeField] private AudioClip swordSwingSFX;
+    private bool wasGrounded;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -188,7 +193,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Attack()
     {
-        if (anim != null) anim.SetTrigger("Attack");
+        if (anim != null)
+        {
+            anim.SetTrigger("Attack");
+            AudioManager.Instance.PlaySFX(swordSwingSFX);
+        }
         if (attackPoint == null) return;
 
         Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
@@ -214,6 +223,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (isCrouching) return;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            AudioManager.Instance.PlaySFX(jumpSFX);
             shouldJump = false;
         }
     }
@@ -235,10 +245,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckGround()
     {
-        if (groundCheck != null)
+        if (groundCheck == null)
+            return;
+
+        bool currentGrounded =
+            Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
+
+        if (!wasGrounded && currentGrounded)
         {
-            isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
+            AudioManager.Instance.PlaySFX(landingSFX);
         }
+
+        wasGrounded = currentGrounded;
+        isGrounded = currentGrounded;
     }
 
     private void CheckLedge()
@@ -382,5 +401,13 @@ public class PlayerMovement : MonoBehaviour
     public void UnlockPlayer()
     {
         isLocked = false;
+    }
+    //chittp1507
+    public void PlayFootstep()
+    {
+        if (stepSFX == null)
+            return;
+
+        AudioManager.Instance.PlaySFX(stepSFX);
     }
 }
