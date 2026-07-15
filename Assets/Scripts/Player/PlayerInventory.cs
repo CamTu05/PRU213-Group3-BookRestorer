@@ -36,7 +36,8 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private Transform slotsContainer;
     [SerializeField] private GameObject dropSlotPrefab;// Hàng 1: Nơi chứa các chữ nhặt được lộn xộn (UI_Letters_Row)
     [SerializeField] private TextMeshProUGUI statusText;
-    [SerializeField] private GameObject submitButton;// Text hiển thị kết quả (Wrong! / Correct!) bên dưới nút Submit
+    [SerializeField] private GameObject submitButton;
+    [SerializeField] private Button okButton;// Text hiển thị kết quả (Wrong! / Correct!) bên dưới nút Submit
 
     [Header("Sprite Font Settings")]
     [SerializeField] private LetterSpriteData letterSpriteData; // Kho lưu trữ ảnh chữ cái ScriptableObject
@@ -247,7 +248,7 @@ public class PlayerInventory : MonoBehaviour
         else
         {
             if (statusText != null)
-                statusText.text = "<color=red>Wrong!</color>";
+                statusText.text = "<color=white>Wrong!</color>";
         }
     }
 
@@ -350,19 +351,21 @@ public class PlayerInventory : MonoBehaviour
     {
         hintPanel.SetActive(true);
 
-        hintText.text = "Mua gợi ý sẽ tốn " + hintCost + " Coin.\n\nBạn có muốn tiếp tục?";
+        hintText.text = "Using a hint costs " + hintCost + " Coin.\n\nDo you want to continue?";
+
+        okButton.interactable = true;
     }
     public void OnHintOKClicked()
     {
         if (score < hintCost)
         {
-            hintText.text = "Không đủ Coin!";
+            hintText.text = "Not enough coins!";
             return;
         }
 
         if (currentHint >= 3)
         {
-            hintText.text = "Bạn đã sử dụng hết gợi ý!";
+            hintText.text = "You have used all available hints!";
             return;
         }
 
@@ -385,6 +388,7 @@ public class PlayerInventory : MonoBehaviour
                 hintText.text = hint3;
                 break;
         }
+        okButton.interactable = false;
     }
     public void CloseHintPanel()
     {
