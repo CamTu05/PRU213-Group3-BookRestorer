@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Enemy3 : Enemy
+public class Enemy2 : Enemy
 {
     [Header("Detection Settings")]
     [SerializeField] private float attackRange = 1.5f;
@@ -12,7 +12,11 @@ public class Enemy3 : Enemy
     private float lastAttackTime = -999f;
     private bool isAttacking = false;
 
-    // Các biến tuần tra cũ
+    // === Cài đặt cho Attack 2 ===
+    [SerializeField] private float attack2Range = 1.8f;           // Có thể khác attack 1
+    [SerializeField] private float attack2CooldownMultiplier = 1.1f; // Có thể cooldown lâu hơn một chút
+
+    // Các biến tuần tra
     [SerializeField] private float patrolDistance = 5f;
     [SerializeField] private float speed = 2f;
     private Vector2 startPos;
@@ -43,43 +47,75 @@ public class Enemy3 : Enemy
     {
         if (Time.time < lastAttackTime + attackCooldown) return false;
 
+        // Kiểm tra trong tầm đánh của cả 2 attack
         Collider2D hitPlayer = Physics2D.OverlapCircle(attackPoint.position, attackRange, playerLayer);
         return hitPlayer != null;
     }
 
-    // ====================== TẤN CÔNG ======================
+    // ====================== TẤN CÔNG RANDOM ======================
     private void PerformAttack()
     {
         isAttacking = true;
         rb.linearVelocity = Vector2.zero;           // Dừng di chuyển khi đánh
 
-        anim.SetBool("Is_Attack", true);            // Bật bool cho Animator
+        // Random chọn Attack hoặc Attack2 (50/50)
+        bool useAttack2 = Random.value > 0.5f;
 
-        lastAttackTime = Time.time;
+        if (useAttack2)
+        {
+            anim.SetBool("Is_Attack2", true);       // Trigger Attack 2
+            lastAttackTime = Time.time + (attackCooldown * attack2CooldownMultiplier);
+        }
+        else
+        {
+            anim.SetBool("Is_Attack", true);        // Trigger Attack thường
+            lastAttackTime = Time.time;
+        }
         PlayAttackSound();
     }
 
-    // Hàm này được gọi bởi Animation Event ở frame cuối của animation Attack
+    // ====================== ANIMATION EVENTS ======================
+
+    // Gọi bởi Animation Event ở frame cuối của animation Attack
     public void EndAttack()
     {
         isAttacking = false;
-        anim.SetBool("Is_Attack", false);           // Tắt bool để quay về Idle/Run
+        anim.SetBool("Is_Attack", false);
     }
 
-    // Hàm gây damage (gọi bởi Animation Event ở frame đánh trúng)
+    // Gọi bởi Animation Event ở frame cuối của animation Attack2
+    public void EndAttack2()
+    {
+        isAttacking = false;
+        anim.SetBool("Is_Attack2", false);
+    }
+
+    // Gọi bởi Animation Event ở frame đánh trúng của Attack 1
     public void DealDamageToPlayer()
     {
-        Collider2D hitPlayer = Physics2D.OverlapCircle(attackPoint.position, attackRange, playerLayer);
+        DealDamage(attackRange);
+    }
+
+    // Gọi bởi Animation Event ở frame đánh trúng của Attack 2
+    public void DealDamageToPlayer2()
+    {
+        DealDamage(attack2Range);
+    }
+
+    private void DealDamage(float range)
+    {
+        Collider2D hitPlayer = Physics2D.OverlapCircle(attackPoint.position, range, playerLayer);
         if (hitPlayer != null)
         {
             PlayerHealth health = hitPlayer.GetComponent<PlayerHealth>();
             if (health != null)
             {
-                health.TakeDamage(1);
+                health.TakeDamage(1);   // Có thể thay đổi sát thương sau
             }
         }
     }
 
+    // ====================== PATROL ======================
     private void Patrol()
     {
         transform.Translate(Vector2.right * speed * (movingRight ? 1 : -1) * Time.deltaTime);
@@ -95,6 +131,4 @@ public class Enemy3 : Enemy
         scaler.x *= -1;
         transform.localScale = scaler;
     }
-
-    
 }

@@ -67,6 +67,7 @@ public class Enemy5 : Enemy
         rb.linearVelocity = Vector2.zero;
         anim.SetBool("Is_Attack", true);
         lastAttackTime = Time.time;
+        PlayAttackSound();
     }
 
     public void EndAttack()
