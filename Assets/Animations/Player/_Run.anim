@@ -22,26 +22,26 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 4667086661595674249, guid: 8746df040364cab44963e4ffaf4cd087, type: 3}
-    - time: 0.5
+    - time: 0.055555556
       value: {fileID: 5270759154210906397, guid: 8746df040364cab44963e4ffaf4cd087, type: 3}
-    - time: 1
+    - time: 0.11111111
       value: {fileID: -4146325936067752102, guid: 8746df040364cab44963e4ffaf4cd087, type: 3}
-    - time: 1.5
+    - time: 0.16666667
       value: {fileID: -3916514138589664008, guid: 8746df040364cab44963e4ffaf4cd087, type: 3}
-    - time: 2
+    - time: 0.22222222
       value: {fileID: 4717485204334195319, guid: 8746df040364cab44963e4ffaf4cd087, type: 3}
-    - time: 2.5
+    - time: 0.2777778
       value: {fileID: -8804724334827305186, guid: 8746df040364cab44963e4ffaf4cd087, type: 3}
-    - time: 3
+    - time: 0.33333334
       value: {fileID: -1651344887907152167, guid: 8746df040364cab44963e4ffaf4cd087, type: 3}
-    - time: 3.5
+    - time: 0.3888889
       value: {fileID: 1419965548442625225, guid: 8746df040364cab44963e4ffaf4cd087, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 2
+  m_SampleRate: 18
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -71,7 +71,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 4
+    m_StopTime: 0.44444445
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -98,49 +98,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.5
-    functionName: PlayFootstep
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 1
-    functionName: PlayFootstep
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 1.5
-    functionName: PlayFootstep
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 2
-    functionName: PlayFootstep
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 2.5
-    functionName: PlayFootstep
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 3
-    functionName: PlayFootstep
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 3.5
+  - time: 0.3888889
     functionName: PlayFootstep
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -161,7 +161,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 2536562305861924195}
   statusIcon: {fileID: 8808563075011925873}
   button: {fileID: 5969522981278354664}
-  completedSprite: {fileID: -8297083642590961838, guid: c856033c3267bed44803756dd1bcd368, type: 3}
+  completedSprite: {fileID: -2873785177785525352, guid: 8ba335b7d0417104c809b76630933d96, type: 3}
   unlockedSprite: {fileID: -3384253458910935077, guid: ce23adaab06a7f24383c5df5dd3c317f, type: 3}
   lockedSprite: {fileID: -4802135588827810334, guid: ce23adaab06a7f24383c5df5dd3c317f, type: 3}
   completedColor: {r: 0.7, g: 1, b: 0.7, a: 1}
@@ -406,7 +406,7 @@ RectTransform:
   m_GameObject: {fileID: 8227810131840875418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3673605906398258540}
