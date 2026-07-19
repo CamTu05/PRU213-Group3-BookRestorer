@@ -22,11 +22,13 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private TextMeshProUGUI hintText;
     [SerializeField] private int hintCost = 5;
     [Header("Coin & UI Settings")]
+    [SerializeField] private AudioClip coinAudioSource;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject missingLetterPanel;
 
     [Header("Letter Drag & Drop System")]
+    [SerializeField] private AudioClip letterAudioSource;
     [SerializeField] private GameObject letterPopupPanel;         // Bảng gỗ lớn chứa UI
     [SerializeField] private string targetWord = "ANIMAL";         // Từ khóa cần hoàn thành
     [SerializeField] private GameObject letterUIPrefab;           // File Prefab quân chữ (màu xanh dưới Project)
@@ -273,7 +275,10 @@ public class PlayerInventory : MonoBehaviour
     {
         if (collision.CompareTag("Coin"))
         {
-          
+            if (AudioManager.Instance != null && coinAudioSource != null)
+            {
+                AudioManager.Instance.PlaySFX(coinAudioSource);
+            }
             score++;
             UpdateScoreUI();
             Destroy(collision.gameObject);
@@ -289,6 +294,10 @@ public class PlayerInventory : MonoBehaviour
             LetterItem letterItem = collision.GetComponent<LetterItem>();
             if (letterItem != null)
             {
+                if (AudioManager.Instance != null && letterAudioSource != null)
+                {
+                    AudioManager.Instance.PlaySFX(letterAudioSource);
+                }
                 CollectLetter(letterItem.GetLetter());
                 Destroy(collision.gameObject);
             }

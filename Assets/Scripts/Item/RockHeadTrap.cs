@@ -11,6 +11,13 @@ public class RockHeadTrap : MonoBehaviour
     [SerializeField] private float speed = 3f;
     [SerializeField] private float waitTimeAtBottom = 0.8f;
 
+    [Header("Linh Kiện Phát Âm Thanh")]
+    [SerializeField] private AudioClip trapAudioSource;
+
+
+    [Header("Cấu Hình Hậu Quả")]
+    public int damage = 3;
+
     private Transform targetTarget;
     private Animator anim;
     private bool isWaiting = false;
@@ -36,6 +43,10 @@ public class RockHeadTrap : MonoBehaviour
         {
             if (targetTarget == pointB)
             {
+                if (AudioManager.Instance != null && trapAudioSource != null)
+                {
+                    AudioManager.Instance.PlaySFX(trapAudioSource);
+                }
                 // NẾU CHẠM ĐẤT: Kích hoạt chuỗi đứng im dập bụi
                 StartCoroutine(HitBottomRoutine());
             }
@@ -64,5 +75,17 @@ public class RockHeadTrap : MonoBehaviour
         // Hết thời gian chờ: Đổi mục tiêu quay về Điểm A và cho phép di chuyển tiếp
         targetTarget = pointA;
         isWaiting = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Player"))
+            return;
+
+        float dir = collision.transform.position.x > transform.position.x ? 1f : -1f;
+
+        collision.GetComponent<PlayerHealth>()?.TakeDamage(damage, dir);
+
+
     }
 }

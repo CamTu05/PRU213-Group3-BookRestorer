@@ -2286,6 +2286,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4870798360718972289, guid: 693900dc10a01f24d8b9223318920efc, type: 3}
+      propertyPath: itemAudioSource
+      value: 
+      objectReference: {fileID: 8300000, guid: 53915703b15387841999ee09bcda0f89, type: 3}
     - target: {fileID: 5412806195218078605, guid: 693900dc10a01f24d8b9223318920efc, type: 3}
       propertyPath: m_Name
       value: Coin (1)
@@ -3802,6 +3806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LetterItem
   letter: 78
   letterSpriteData: {fileID: 0}
+  collectSFX: {fileID: 0}
 --- !u!61 &848702933
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5631,6 +5636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LetterItem
   letter: 73
   letterSpriteData: {fileID: 0}
+  collectSFX: {fileID: 0}
 --- !u!61 &1153196568
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6024,6 +6030,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc5ee8e9fbe7f045b08f77e20770bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthController
+  maxHealth: 10
+  healthBarFill: {fileID: 0}
+  iframeDuration: 1.2
+  gameOverPanel: {fileID: 0}
+  damageText: {fileID: 0}
+  damageTextDuration: 1
+  hpText: {fileID: 0}
+  knockbackDistance: 0.4
+  knockbackSpeed: 3
+  knockbackDuration: 0.15
+  hurtSFX: {fileID: 0}
+  deathSFX: {fileID: 0}
 --- !u!114 &1203171709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6043,9 +6061,11 @@ MonoBehaviour:
   hintPanel: {fileID: 374064960}
   hintText: {fileID: 1812003651}
   hintCost: 5
+  coinAudioSource: {fileID: 0}
   scoreText: {fileID: 1149492542}
   winPanel: {fileID: 2011327546}
   missingLetterPanel: {fileID: 1064775764}
+  letterAudioSource: {fileID: 0}
   letterPopupPanel: {fileID: 1753246137}
   targetWord: VINE
   letterUIPrefab: {fileID: 2967342821506250581, guid: 495836933fc81db429745eccf83670ca, type: 3}
@@ -6069,17 +6089,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 10
-  healthBarFill: {fileID: 1122466271}
+  healthBarFill: {fileID: 0}
   iframeDuration: 1.2
-  gameOverPanel: {fileID: 1093031008}
-  damageText: {fileID: 1545902693}
+  gameOverPanel: {fileID: 0}
+  damageText: {fileID: 0}
   damageTextDuration: 1
-  hpText: {fileID: 1645208683}
+  hpText: {fileID: 0}
   knockbackDistance: 0.4
   knockbackSpeed: 3
   knockbackDuration: 0.15
-  hurtSFX: {fileID: 8300000, guid: 0d6385f75d714ae40865322e530156f3, type: 3}
-  deathSFX: {fileID: 8300000, guid: cf3816c2b9ca2334ab0a156f3b9887d1, type: 3}
+  hurtSFX: {fileID: 0}
+  deathSFX: {fileID: 0}
 --- !u!1 &1213228280
 GameObject:
   m_ObjectHideFlags: 0
@@ -6717,7 +6737,7 @@ Transform:
   m_GameObject: {fileID: 1375790153}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.1633997, y: -1.718074, z: -10}
+  m_LocalPosition: {x: 0, y: -1.73, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21610,6 +21630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LetterItem
   letter: 86
   letterSpriteData: {fileID: 0}
+  collectSFX: {fileID: 0}
 --- !u!61 &1584372818
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -25548,6 +25569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LetterItem
   letter: 69
   letterSpriteData: {fileID: 0}
+  collectSFX: {fileID: 0}
 --- !u!61 &2051198002
 BoxCollider2D:
   m_ObjectHideFlags: 0
