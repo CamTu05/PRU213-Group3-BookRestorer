@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject coin ;
     [SerializeField] private GameObject popUpLetter;
     [SerializeField] private GameObject winPanel;
+    [SerializeField] private Button btnNextLevel;
 
     [Header("Level Information")]
     [SerializeField] private BookData currentBook;
@@ -86,6 +87,10 @@ public class MenuManager : MonoBehaviour
         coin?.SetActive(false);
         popUpLetter?.SetActive(false);
         pausePanel?.SetActive(false);
+        LevelData nextLevel = GameProgressManager.Instance.GetNextLevel(currentBook, levelNumber);
+
+        btnNextLevel.gameObject.SetActive(nextLevel != null);
+
         winPanel?.SetActive(true);
 
         Time.timeScale = 0f;
@@ -101,7 +106,7 @@ public class MenuManager : MonoBehaviour
             return;
         }
 
-        LevelData nextLevel = GameProgressManager.Instance.GetNextLevel(currentBook);
+        LevelData nextLevel = GameProgressManager.Instance.GetNextLevel(currentBook, levelNumber);
 
         if (nextLevel == null || string.IsNullOrEmpty(nextLevel.sceneName))
         {

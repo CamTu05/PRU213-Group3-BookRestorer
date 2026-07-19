@@ -4,6 +4,7 @@
  */
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameProgressManager : MonoBehaviour
 {
@@ -97,8 +98,8 @@ public class GameProgressManager : MonoBehaviour
         return PlayerPrefs.GetString(LAST_COMPLETED_BOOK_KEY, "");
     }
 
-    // Trả về level tiếp theo cần chơi của Book.
-    public LevelData GetNextLevel(BookData book)
+    // Trả về level mới nhất của Book
+    public LevelData GetLatestLevel(BookData book)
     {
         if (book == null || book.levels == null || book.levels.Count == 0)
         {
@@ -113,6 +114,7 @@ public class GameProgressManager : MonoBehaviour
         return book.levels[unlockedLevel - 1];
     }
 
+    //Dùng cho button Play ở MainMenu, trả về level tiếp theo cần chơi dựa trên Book đã hoàn thành gần nhất.
     public LevelData GetContinueLevel(BookData[] books)
     {
         if (books == null || books.Length == 0)
@@ -138,7 +140,27 @@ public class GameProgressManager : MonoBehaviour
             }
         }
 
-        return GetNextLevel(targetBook);
+        return GetLatestLevel(targetBook);
+    }
+
+    // Trả về level ngay sau level hiện tại trong cùng Book.
+    public LevelData GetNextLevel(BookData book, int currentLevelNumber)
+    {
+        if (book == null || book.levels == null || book.levels.Count == 0)
+        {
+            Debug.LogError("GameProgressManager: Book hoặc Levels chưa được config.");
+            return null;
+        }
+
+        int nextLevelNumber = currentLevelNumber + 1;
+
+        // Nếu đã là level cuối cùng của Book thì không còn level tiếp theo.
+        if (nextLevelNumber > book.levels.Count)
+        {
+            return null;
+        }
+
+        return book.levels[nextLevelNumber - 1];
     }
 
     // Xóa toàn bộ tiến trình game.
@@ -146,5 +168,7 @@ public class GameProgressManager : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
+
+        SceneManager.LoadScene("MainMenu");
     }
 }

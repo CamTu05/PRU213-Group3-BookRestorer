@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 68f77d1d1c3f3b246b5cd18ea70ee805
+guid: 8ba335b7d0417104c809b76630933d96
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6265756841749686011
-    second: anastasiya-grebennik-background1_0
+      213: -2873785177785525352
+    second: completed-removebg-preview_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: anastasiya-grebennik-background1_0
+      name: completed-removebg-preview_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1122
-        height: 540
+        x: 172
+        y: 30
+        width: 317
+        height: 317
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bf6a67176a074f650800000000000000
-      internalID: 6265756841749686011
+      spriteID: 89b9f455b934e18d0800000000000000
+      internalID: -2873785177785525352
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      anastasiya-grebennik-background1_0: 6265756841749686011
+      completed-removebg-preview_0: -2873785177785525352
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
