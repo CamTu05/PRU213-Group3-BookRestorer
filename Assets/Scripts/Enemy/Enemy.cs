@@ -79,4 +79,17 @@ public class Enemy : MonoBehaviour
         Debug.Log($"{gameObject.name} đã chết!");
         Destroy(gameObject, 1.5f); // Xóa quái khỏi Game sau 1.5 giây
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(damageToPlayer, transform);
+            }
+        }
+    }
 }

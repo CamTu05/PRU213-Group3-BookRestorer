@@ -3,7 +3,6 @@ using TMPro;
 using UnityEngine.UI; // Dùng để xử lý LayoutRebuilder ép đồng bộ UI khay chứa
 using System.Collections.Generic;
 
-[RequireComponent(typeof(AudioSource))]
 public class PlayerInventory : MonoBehaviour
 
 {
@@ -23,7 +22,6 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private TextMeshProUGUI hintText;
     [SerializeField] private int hintCost = 5;
     [Header("Coin & UI Settings")]
-    [SerializeField] private AudioClip coinSound;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject missingLetterPanel;
@@ -54,7 +52,7 @@ public class PlayerInventory : MonoBehaviour
     private PlayerMovement playerMovement;
     private int score = 0;
     private bool canSolveWord = false;
-
+    [SerializeField] private MenuManager menuManager;
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -80,6 +78,8 @@ public class PlayerInventory : MonoBehaviour
         {
             if (show)
             {
+                AudioManager.Instance.PlayChestOpen();
+                AudioManager.Instance.PlayPopupOpen();
                 letterPopupPanel.SetActive(true);
 
                 if (canSolveWord)
@@ -93,6 +93,7 @@ public class PlayerInventory : MonoBehaviour
                 }
                 else
                 {
+                    AudioManager.Instance.PlayPopupClose();
                     slotsContainer.gameObject.SetActive(false);
 
                     if (submitButton != null)
@@ -240,6 +241,7 @@ public class PlayerInventory : MonoBehaviour
         // 5. So sánh kết quả với từ khóa mục tiêu (Ví dụ: ANIMAL)
         if (playerWord.ToUpper() == targetWord.ToUpper())
         {
+            AudioManager.Instance.PlaySuccess();
             if (statusText != null)
                 statusText.text = "<color=green>Correct!</color>";
 
@@ -248,26 +250,29 @@ public class PlayerInventory : MonoBehaviour
         else
         {
             if (statusText != null)
-                statusText.text = "<color=white>Wrong!</color>";
+                AudioManager.Instance.PlayWrongAnswer(); 
+            statusText.text = "<color=white>Wrong!</color>";
         }
     }
 
     private void ShowWinPanel()
     {
-        if (winPanel != null) winPanel.SetActive(true);
-        if (playerMovement != null) playerMovement.FreezeOnWin();
-        Time.timeScale = 0f; // Dừng game chiến thắng
+        AudioManager.Instance.PlayVictory();
+        if (menuManager != null)
+        {
+            menuManager.TriggerWin();
+        }
+
+        if (playerMovement != null)
+        {
+            playerMovement.FreezeOnWin();
+        }
+
         if (letterPopupPanel != null)
         {
-            // Cách 1: Tắt trực tiếp Object (Biến mất ngay tức thì)
             letterPopupPanel.SetActive(false);
-
-            // Cách 2: Nếu ông muốn nó dùng hiệu ứng thu nhỏ mượt mà của LateUpdate, hãy dùng 2 dòng dưới thay thế:
-            // targetPopupScale = Vector3.zero;
-            // isAnimatingPopup = true;
         }
     }
-
     // ========================================================
     // XỬ LÝ VA CHẠM TRIGGER
     // ========================================================
@@ -275,19 +280,16 @@ public class PlayerInventory : MonoBehaviour
     {
         if (collision.CompareTag("Coin"))
         {
-            if (audioSource != null && coinSound != null)
-            {
-                AudioManager.Instance.PlaySFX(coinSound);
-            }
+          
             score++;
             UpdateScoreUI();
             Destroy(collision.gameObject);
         }
 
-        if (collision.CompareTag("Trap"))
-        {
-            if (playerHealth != null) playerHealth.TakeDamage(1);
-        }
+        //if (collision.CompareTag("Trap"))
+        //{
+        //    if (playerHealth != null) playerHealth.TakeDamage(1);
+        //}
 
         if (collision.CompareTag("Letter"))
         {
@@ -295,6 +297,7 @@ public class PlayerInventory : MonoBehaviour
             if (letterItem != null)
             {
                 CollectLetter(letterItem.GetLetter());
+                AudioManager.Instance.PlayLetterPickup();
                 Destroy(collision.gameObject);
             }
         }
@@ -329,13 +332,13 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Trap"))
-        {
-            if (playerHealth != null) playerHealth.TakeDamage(1);
-        }
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Trap"))
+    //    {
+    //        if (playerHealth != null) playerHealth.TakeDamage(1);
+    //    }
+    //}
     public bool CanSolveWord()
     {
         return canSolveWord;
@@ -371,6 +374,8 @@ public class PlayerInventory : MonoBehaviour
 
         score -= hintCost;
         UpdateScoreUI();
+
+        AudioManager.Instance.PlayHint();
 
         currentHint++;
 

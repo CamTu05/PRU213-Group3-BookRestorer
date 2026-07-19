@@ -1,97 +1,115 @@
-//Author: Nguyễn Văn Đức
-//Date: 10/06/2026
-//Description: Quản lý menu chính, bảng pause và chức năng restart game
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class MenuManager : MonoBehaviour
 {
-    //chittp
-    [SerializeField] private PlayerMovement pm;
-    //end
-    [Header("UI Panels")]
-    public GameObject startPanel;
-    public GameObject pausePanel;
-    //c-0907
-    public GameObject gameOverPanel;
-    [Header("UI Elements")]
-    public GameObject pauseButton;
-    //end
+    [Header("Panels")]
+    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject inventory ;
+    [SerializeField] private GameObject healthBar ;
+    [SerializeField] private GameObject coin ;
+    [SerializeField] private GameObject popUpLetter;
+    [SerializeField] private GameObject winPanel;
 
-    private static bool isRetrying = false;
-    //chittp-0907
-    private bool isGameOver = false;
-    //end
+    [Header("Level Information")]
+    [SerializeField] private BookData currentBook;
+    [SerializeField] private int levelNumber;
 
-    private void Start()
-    {
-        //chittp-0907
-        isGameOver = false;
-        //end
-        if (pausePanel != null) pausePanel.SetActive(false);
-        //chittp
-        if (gameOverPanel != null) gameOverPanel.SetActive(false);
-        if (pauseButton != null) pauseButton.SetActive(true);
-        //end
-        if (startPanel != null)
-        {
-            if (isRetrying)
-            {
-                startPanel.SetActive(false);
-                Time.timeScale = 1f;
-                isRetrying = false;
-            }
-            else
-            {
-                startPanel.SetActive(true);
-                Time.timeScale = 0f;
-            }
-        }
-    }
 
-    public void StartGame()
-    {
-        if (startPanel != null) startPanel.SetActive(false);
-        Time.timeScale = 1f;
-    }
-
-    public void RestartGame()
-    {
-        isRetrying = true;
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    private bool isGameOver;
 
     public void PauseGame()
     {
-        Time.timeScale = 0f; 
-        //chittp-0907
         if (isGameOver) return;
-        //end
-        if (pausePanel != null)
-        {
-            pausePanel.SetActive(true);
-        }
-       
+        inventory?.SetActive(false);
+        healthBar?.SetActive(false);
+        coin?.SetActive(false);
+        pausePanel?.SetActive(true);
+        popUpLetter?.SetActive(false);
+        Time.timeScale = 0f;
     }
 
     public void ResumeGame()
     {
-        if (pausePanel != null)
-        {
-            pausePanel.SetActive(false); 
-        }
-        Time.timeScale = 1f; 
+        healthBar?.SetActive(true);
+        inventory?.SetActive(true);
+        coin?.SetActive(true);
+
+        popUpLetter?.SetActive(true);
+        pausePanel?.SetActive(false);
+        Time.timeScale = 1f;
     }
-    //chittp-0907
+
     public void TriggerGameOver()
     {
+        if (isGameOver) return;
+
         isGameOver = true;
-        if (pm != null) pm.FreezeOnDeath();
-        if (pausePanel != null) pausePanel.SetActive(false);
-        if (gameOverPanel != null) gameOverPanel.SetActive(true);
+        inventory?.SetActive(false);
+        healthBar?.SetActive(false);
+        coin?.SetActive(false);
+        pausePanel?.SetActive(false);
+        gameOverPanel?.SetActive(true);
+        popUpLetter?.SetActive(false);
         Time.timeScale = 0f;
     }
-    //end
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ResetCheckpoint();
+        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void GoHome()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void TriggerWin()
+    {
+        if (isGameOver) return;
+
+        if (GameProgressManager.Instance != null)
+        {
+            GameProgressManager.Instance.CompleteLevel(currentBook.bookId, levelNumber);
+        }
+
+        inventory?.SetActive(false);
+        healthBar?.SetActive(false);
+        coin?.SetActive(false);
+        popUpLetter?.SetActive(false);
+        pausePanel?.SetActive(false);
+        winPanel?.SetActive(true);
+
+        Time.timeScale = 0f;
+    }
+
+    public void NextLevel()
+    {
+        Time.timeScale = 1f;
+
+        if (currentBook == null)
+        {
+            Debug.LogError("MenuManager: Current Book chưa được config.");
+            return;
+        }
+
+        LevelData nextLevel = GameProgressManager.Instance.GetNextLevel(currentBook);
+
+        if (nextLevel == null || string.IsNullOrEmpty(nextLevel.sceneName))
+        {
+            Debug.LogError("MenuManager: Không tìm thấy level tiếp theo.");
+            return;
+        }
+
+        SceneManager.LoadScene(nextLevel.sceneName);
+    }
+
 }

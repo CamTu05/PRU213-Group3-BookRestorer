@@ -18,6 +18,15 @@ public class AudioManager : MonoBehaviour
     [Header("UI Sounds")]
     [SerializeField] private AudioClip buttonHoverSound;
     [SerializeField] private AudioClip buttonClickSound;
+    [Header("Gameplay Sounds")]
+    [SerializeField] private AudioClip letterPickupSound;
+    [SerializeField] private AudioClip chestOpenSound;
+    [SerializeField] private AudioClip popupOpenSound;
+    [SerializeField] private AudioClip popupCloseSound;
+    [SerializeField] private AudioClip hintSound;
+    [SerializeField] private AudioClip wrongAnswerSound;
+    [SerializeField] private AudioClip successSound;
+    [SerializeField] private AudioClip victorySound;
 
     // Khởi tạo Singleton và load volume đã lưu.
     private void Awake()
@@ -34,22 +43,25 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // Phát nhạc nền.
-    public void PlayMusic(AudioClip clip)
+    // Phát nhạc nền, nếu đang phát đúng clip thì không phát lại.
+    public void PlayMusic(AudioClip clip, float volumeScale = 1f)
     {
         if (clip == null || musicSource == null) return;
 
+        if (musicSource.clip == clip && musicSource.isPlaying) return;
+
         musicSource.clip = clip;
         musicSource.loop = true;
+        musicSource.volume = volumeScale;
         musicSource.Play();
     }
 
     // Phát hiệu ứng âm thanh.
-    public void PlaySFX(AudioClip clip)
+    public void PlaySFX(AudioClip clip, float volumeScale = 1f)
     {
         if (clip == null || sfxSource == null) return;
 
-        sfxSource.PlayOneShot(clip);
+        sfxSource.PlayOneShot(clip, volumeScale);
     }
 
     // Set âm lượng nhạc nền.
@@ -105,5 +117,44 @@ public class AudioManager : MonoBehaviour
     public void PlayButtonClick()
     {
         PlaySFX(buttonClickSound);
+    }
+    public void PlayLetterPickup()
+    {
+        PlaySFX(letterPickupSound);
+    }
+
+    public void PlayChestOpen()
+    {
+        PlaySFX(chestOpenSound);
+    }
+
+    public void PlayPopupOpen()
+    {
+        PlaySFX(popupOpenSound);
+    }
+
+    public void PlayPopupClose()
+    {
+        PlaySFX(popupCloseSound);
+    }
+
+    public void PlayHint()
+    {
+        PlaySFX(hintSound);
+    }
+
+    public void PlayWrongAnswer()
+    {
+        PlaySFX(wrongAnswerSound);
+    }
+
+    public void PlaySuccess()
+    {
+        PlaySFX(successSound);
+    }
+
+    public void PlayVictory()
+    {
+        PlaySFX(victorySound);
     }
 }

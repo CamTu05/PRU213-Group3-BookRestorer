@@ -1801,7 +1801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &374064961
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3757,7 +3757,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &814689605
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3969,7 +3969,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c1bab2f743c77243a12af94433708f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneManagement
-  popupPanel: {fileID: 1012469011}
 --- !u!4 &881300609
 Transform:
   m_ObjectHideFlags: 0
@@ -4373,7 +4372,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1012469012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5611,26 +5610,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c977e0ec47f85b041aeef6974c2e1ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthController
-  maxHealth: 10
-  healthBarFill: {fileID: 1122466271}
-  iframeDuration: 1.2
-  gameOverText: {fileID: 814689604}
-  enemyDamage: 1
-  trapDamage: 2
-  knockbackDistance: 50
-  knockbackSpeed: 1
-  knockbackDuration: 1
---- !u!114 &1203171709 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7929922922298036512, guid: 7785c37fde7755b42826522c2a4a2fe3, type: 3}
-  m_PrefabInstance: {fileID: 1826273531}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203171700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c3d27d0fd2cedf4d9be2d5e8843e353, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
 --- !u!1 &1213228280
 GameObject:
   m_ObjectHideFlags: 0
@@ -22851,6 +22830,10 @@ PrefabInstance:
       value: CAT
       objectReference: {fileID: 0}
     - target: {fileID: 5468069173909233626, guid: 7785c37fde7755b42826522c2a4a2fe3, type: 3}
+      propertyPath: menuManager
+      value: 
+      objectReference: {fileID: 2096487775}
+    - target: {fileID: 5468069173909233626, guid: 7785c37fde7755b42826522c2a4a2fe3, type: 3}
       propertyPath: submitButton
       value: 
       objectReference: {fileID: 1497709555}
@@ -22937,6 +22920,10 @@ PrefabInstance:
     - target: {fileID: 7828762569613007281, guid: 7785c37fde7755b42826522c2a4a2fe3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7929922922298036512, guid: 7785c37fde7755b42826522c2a4a2fe3, type: 3}
+      propertyPath: jumpForce
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7235203641335270081, guid: 7785c37fde7755b42826522c2a4a2fe3, type: 3}
@@ -23942,7 +23929,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2011327547
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24343,11 +24330,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c407844fd320f324ab00367b095a2f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuManager
-  pm: {fileID: 1203171709}
-  startPanel: {fileID: 0}
   pausePanel: {fileID: 1012469011}
   gameOverPanel: {fileID: 814689604}
-  pauseButton: {fileID: 2142133820}
+  inventory: {fileID: 0}
+  healthBar: {fileID: 0}
+  coin: {fileID: 0}
+  popUpLetter: {fileID: 0}
+  winPanel: {fileID: 0}
+  currentBook: {fileID: 0}
+  levelNumber: 0
 --- !u!1 &2099107845 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4275916789620763998, guid: acb551d0796b15749a82a5c01c386975, type: 3}

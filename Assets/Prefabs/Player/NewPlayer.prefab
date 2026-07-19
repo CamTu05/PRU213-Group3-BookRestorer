@@ -149,15 +149,13 @@ PrefabInstance:
       objectReference: {fileID: 22100000, guid: 62afb351d52d7bd45a39a33f59b33bfd, type: 2}
     m_RemovedComponents:
     - {fileID: 5050892670936743124, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
+    - {fileID: 5229776695373171624, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5513403414680420832, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8901108490956036774}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1461277855484927731, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7235203641335270081}
     - targetCorrespondingSourceObject: {fileID: 1461277855484927731, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5468069173909233626}
@@ -180,22 +178,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1461277855484927731, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
   m_PrefabInstance: {fileID: 2316769018861295697}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7235203641335270081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3774387377448502946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bc5ee8e9fbe7f045b08f77e20770bc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  maxHealth: 5
-  healthContainer: {fileID: 0}
-  iframeDuration: 1.2
-  gameOverText: {fileID: 0}
 --- !u!114 &5468069173909233626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,18 +190,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 746a388d263fc3e4cb3281fde2e55c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
+  hint1: 
+  hint2: 
+  hint3: 
   hintPanel: {fileID: 0}
   hintText: {fileID: 0}
   hintCost: 5
-  coinSound: {fileID: 8300000, guid: f88ba9cd9b172fe4aa651b5395333bee, type: 3}
   scoreText: {fileID: 0}
   winPanel: {fileID: 0}
+  missingLetterPanel: {fileID: 0}
   letterPopupPanel: {fileID: 0}
   targetWord: ANIMAL
   letterUIPrefab: {fileID: 0}
   lettersContainer: {fileID: 0}
+  slotsContainer: {fileID: 0}
+  dropSlotPrefab: {fileID: 0}
   statusText: {fileID: 0}
+  submitButton: {fileID: 0}
+  okButton: {fileID: 0}
   letterSpriteData: {fileID: 0}
+  menuManager: {fileID: 0}
 --- !u!114 &7929922922298036512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,7 +237,7 @@ MonoBehaviour:
   ledgeJumpForce: 12
   wallLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   climbSpeed: 4
   attackPoint: {fileID: 8901108490956036774}
   attackRange: 1.3

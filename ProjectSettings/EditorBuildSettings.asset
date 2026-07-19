@@ -11,11 +11,20 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Home_Screen.unity
     guid: a41168adc8601a2489aa59a2d88f01ce
-  - enabled: 1
-    path: Assets/Scenes/Level_01.unity
+  - enabled: 0
+    path: Assets/Scenes/Level_01_Chi.unity
     guid: e864aa81816b2db40ba4fde5f7665ddd
+  - enabled: 0
+    path: Assets/Scenes/Level_01.unity
+    guid: 6c749c5c486f74446871a9a6367dc3d2
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 0f7817b756ac13b4bbbdda1325ca3a49
+  - enabled: 1
+    path: Assets/Scenes/Jungle_Level_01.unity
+    guid: 7d99efcea9234fb4f82a94d0c247ad9c
+  - enabled: 1
+    path: Assets/Scenes/Jungle_Level_02.unity
+    guid: 16cffc52acc00bc4992dfed5f849f230
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
