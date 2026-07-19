@@ -71,7 +71,7 @@ public class Enemy2 : Enemy
             anim.SetBool("Is_Attack", true);        // Trigger Attack thường
             lastAttackTime = Time.time;
         }
-        PlayAttackSound();
+        
     }
 
     // ====================== ANIMATION EVENTS ======================
