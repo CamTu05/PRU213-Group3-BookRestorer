@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6748871798279092911}
   - component: {fileID: 3257779799327201197}
   - component: {fileID: 1449447198629396066}
+  - component: {fileID: 4870798360718972289}
   m_Layer: 0
   m_Name: coin
   m_TagString: Coin
@@ -80,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -136003617
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8980438598086963491, guid: ede4b03d4049f481a80ce6756418b385, type: 3}
@@ -161,3 +162,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.03125, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &4870798360718972289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5412806195218078605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cab3f95a279374043bf6d707b1abb7d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CoinController
+  trapAudioSource: {fileID: 8300000, guid: 53915703b15387841999ee09bcda0f89, type: 3}

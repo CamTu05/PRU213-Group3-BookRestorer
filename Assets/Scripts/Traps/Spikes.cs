@@ -5,7 +5,7 @@ using Unity.Cinemachine;
 public class Spikes : MonoBehaviour
 {
     [Header("Linh Kiện Phát Âm Thanh")]
-    public AudioSource trapAudioSource;
+    [SerializeField] private AudioClip trapAudioSource;
 
     [Header("Cấu Hình Hậu Quả")]
     public int damage = 3;
@@ -28,6 +28,9 @@ public class Spikes : MonoBehaviour
         other.GetComponent<PlayerHealth>()
              ?.TakeDamage(damage, dir);
 
-        trapAudioSource.Play();
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayMusic(trapAudioSource, 0.5f);
+        }
     }
 }

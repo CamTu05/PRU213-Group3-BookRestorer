@@ -5838,9 +5838,14 @@ MonoBehaviour:
   healthBarFill: {fileID: 1122466271}
   iframeDuration: 1.2
   gameOverPanel: {fileID: 1093031008}
+  damageText: {fileID: 0}
+  damageTextDuration: 1
+  hpText: {fileID: 0}
   knockbackDistance: 0.4
   knockbackSpeed: 3
   knockbackDuration: 0.15
+  hurtSFX: {fileID: 0}
+  deathSFX: {fileID: 0}
 --- !u!1 &1213228280
 GameObject:
   m_ObjectHideFlags: 0
