@@ -924,6 +924,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LetterItem
   letter: 86
   letterSpriteData: {fileID: 0}
+  collectSFX: {fileID: 0}
 --- !u!212 &161669599
 SpriteRenderer:
   serializedVersion: 2
@@ -28555,6 +28556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LetterItem
   letter: 69
   letterSpriteData: {fileID: 0}
+  collectSFX: {fileID: 0}
 --- !u!212 &737185883
 SpriteRenderer:
   serializedVersion: 2
@@ -31699,7 +31701,7 @@ Transform:
   m_GameObject: {fileID: 1208242730}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.2446594, y: -0.63501495, z: -10}
+  m_LocalPosition: {x: -1.189023, y: -0.61636376, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -31868,7 +31870,7 @@ Transform:
   m_GameObject: {fileID: 1210646538}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 182.44, y: 1.51, z: 0}
+  m_LocalPosition: {x: 182.51, y: 1.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32013,7 +32015,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_MaskInteraction: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -39419,6 +39421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LetterItem
   letter: 73
   letterSpriteData: {fileID: 0}
+  collectSFX: {fileID: 0}
 --- !u!212 &1458191761
 SpriteRenderer:
   serializedVersion: 2
@@ -39719,9 +39722,11 @@ MonoBehaviour:
   hintPanel: {fileID: 793474763}
   hintText: {fileID: 427249088}
   hintCost: 5
+  coinAudioSource: {fileID: 0}
   scoreText: {fileID: 78208285}
   winPanel: {fileID: 1659998835}
   missingLetterPanel: {fileID: 1380408357}
+  letterAudioSource: {fileID: 0}
   letterPopupPanel: {fileID: 708416718}
   targetWord: VINE
   letterUIPrefab: {fileID: 2967342821506250581, guid: 495836933fc81db429745eccf83670ca, type: 3}
@@ -40999,6 +41004,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LetterItem
   letter: 78
   letterSpriteData: {fileID: 0}
+  collectSFX: {fileID: 0}
 --- !u!212 &1708949253
 SpriteRenderer:
   serializedVersion: 2
@@ -43973,8 +43979,8 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1608555957}
-  - {fileID: 891231296}
-  - {fileID: 1964081028}
   - {fileID: 345101556}
   - {fileID: 1000736277}
+  - {fileID: 1964081028}
+  - {fileID: 1608555957}
+  - {fileID: 891231296}

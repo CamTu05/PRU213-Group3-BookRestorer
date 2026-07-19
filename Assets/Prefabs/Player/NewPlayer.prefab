@@ -101,11 +101,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5513403414680420832, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -81.4306
+      value: -1.15
       objectReference: {fileID: 0}
     - target: {fileID: 5513403414680420832, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.3461103
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 5513403414680420832, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -117,15 +117,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5513403414680420832, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5513403414680420832, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5513403414680420832, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00029398908
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5513403414680420832, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5513403414680420832, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0.034
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7719070538366868247, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
       propertyPath: m_Sprite
@@ -159,6 +159,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1461277855484927731, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7929922922298036512}
+    - targetCorrespondingSourceObject: {fileID: 1461277855484927731, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5217740031003007399}
+    - targetCorrespondingSourceObject: {fileID: 1461277855484927731, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5357086307001736500}
   m_SourcePrefab: {fileID: 100100000, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
 --- !u!4 &468263849439532449 stripped
 Transform:
@@ -190,7 +196,7 @@ MonoBehaviour:
   moveSpeed: 9
   jumpForce: 14
   fallMultiplier: 3.5
-  lowJumpMultiplier: 3
+  lowJumpMultiplier: 1
   crouchSpeedMultiplier: 0.5
   groundCheck: {fileID: 468263849439532449}
   checkRadius: 0.4
@@ -208,10 +214,67 @@ MonoBehaviour:
   attackRange: 1.3
   damageAmount: 25
   isGrounded: 0
-  stepSFX: {fileID: 0}
-  jumpSFX: {fileID: 0}
-  landingSFX: {fileID: 0}
-  swordSwingSFX: {fileID: 0}
+  stepSFX: {fileID: 8300000, guid: b042161bfa90ae145917e661c8703e9a, type: 3}
+  jumpSFX: {fileID: 8300000, guid: 4e349dc959014a845b9aa317d1c2b7f0, type: 3}
+  landingSFX: {fileID: 8300000, guid: eaae8fe8d600e1f459f34aa5757fa3b8, type: 3}
+  swordSwingSFX: {fileID: 8300000, guid: f11db4559b3ffff45b62e9327fc5535d, type: 3}
+--- !u!114 &5217740031003007399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3774387377448502946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc5ee8e9fbe7f045b08f77e20770bc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthController
+  maxHealth: 10
+  healthBarFill: {fileID: 0}
+  iframeDuration: 1.2
+  gameOverPanel: {fileID: 0}
+  hpText: {fileID: 0}
+  knockbackDistance: 0.4
+  knockbackSpeed: 3
+  knockbackDuration: 0.15
+  hurtSFX: {fileID: 8300000, guid: 0d6385f75d714ae40865322e530156f3, type: 3}
+  deathSFX: {fileID: 8300000, guid: cf3816c2b9ca2334ab0a156f3b9887d1, type: 3}
+--- !u!114 &5357086307001736500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3774387377448502946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 746a388d263fc3e4cb3281fde2e55c35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
+  hint1: I am a living rope woven by nature, climbing high to touch the sun.
+  hint2: To the swift knight, I am a ladder; to the careless foot, I am a trap.
+  hint3: Strike me with your sword to clear the path, or swing across the deadly
+    chasm.
+  hintPanel: {fileID: 0}
+  hintText: {fileID: 0}
+  hintCost: 5
+  coinAudioSource: {fileID: 8300000, guid: 53915703b15387841999ee09bcda0f89, type: 3}
+  scoreText: {fileID: 0}
+  winPanel: {fileID: 0}
+  missingLetterPanel: {fileID: 0}
+  letterAudioSource: {fileID: 8300000, guid: a502577febfa96244a559c88d7905d7e, type: 3}
+  letterPopupPanel: {fileID: 0}
+  targetWord: VINE
+  letterUIPrefab: {fileID: 2967342821506250581, guid: 495836933fc81db429745eccf83670ca, type: 3}
+  lettersContainer: {fileID: 0}
+  slotsContainer: {fileID: 0}
+  dropSlotPrefab: {fileID: 7236975408165143113, guid: d2b3af1f20ebcdc4b92cc2a25ef8cefe, type: 3}
+  statusText: {fileID: 0}
+  submitButton: {fileID: 0}
+  okButton: {fileID: 0}
+  letterSpriteData: {fileID: 11400000, guid: 2ec983cd922ce4247b9789bdd49c7a39, type: 2}
+  menuManager: {fileID: 0}
 --- !u!4 &7828762569613007281 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5513403414680420832, guid: 36abcccfcfe0e0b41afaf952ad99fd4f, type: 3}
