@@ -14,8 +14,6 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float iframeDuration = 1.2f;
     [SerializeField] private GameObject gameOverPanel;
 
-    [SerializeField] private TMP_Text damageText;
-    [SerializeField] private float damageTextDuration = 1f;
     [SerializeField] private TMP_Text hpText;
     private Coroutine damageRoutine;
 
@@ -59,7 +57,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= damage;
         AudioManager.Instance.PlaySFX(hurtSFX);
         Debug.Log($"Frame={Time.frameCount} | HP sau={currentHealth}");
-        ShowDamage(damage);
+        //ShowDamage(damage);
         UpdateHealthUI();
 
         iframeTimer = iframeDuration;
@@ -138,24 +136,24 @@ public class PlayerHealth : MonoBehaviour
         if (movement != null && currentHealth > 0)
             movement.UnlockPlayer();
     }
-    //chittp 1507
-    private void ShowDamage(int damage)
-    {
-        if (damageText == null) return;
+    ////chittp 1507
+    //private void ShowDamage(int damage)
+    //{
+    //    if (damageText == null) return;
 
-        if (damageRoutine != null)
-            StopCoroutine(damageRoutine);
+    //    if (damageRoutine != null)
+    //        StopCoroutine(damageRoutine);
 
-        damageRoutine = StartCoroutine(ShowDamageCoroutine(damage));
-    }
+    //    damageRoutine = StartCoroutine(ShowDamageCoroutine(damage));
+    //}
 
-    private IEnumerator ShowDamageCoroutine(int damage)
-    {
-        damageText.gameObject.SetActive(true);
-        damageText.text = "-" + damage;
+    //private IEnumerator ShowDamageCoroutine(int damage)
+    //{
+    //    damageText.gameObject.SetActive(true);
+    //    damageText.text = "-" + damage;
 
-        yield return new WaitForSeconds(damageTextDuration);
+    //    yield return new WaitForSeconds(damageTextDuration);
 
-        damageText.gameObject.SetActive(false);
-    }
+    //    damageText.gameObject.SetActive(false);
+    //}
 }
