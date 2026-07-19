@@ -31,11 +31,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SaveDefaultPosition();
-        //GameObject player = GameObject.FindGameObjectWithTag("Player");
-        //if (player != null)
-        //{
-        //    respawnPosition = player.transform.position;
-        //}
     }
 
     private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
