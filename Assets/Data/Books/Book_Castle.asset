@@ -16,4 +16,6 @@ MonoBehaviour:
   bookName: The Mystery Castle
   description: The mystery castle is waiting for your exploration...
   coverImage: {fileID: -8259236897281494648, guid: 3cbeb68695b1ff54bbb4eaafa1b97c60, type: 3}
-  levels: []
+  levels:
+  - {fileID: 11400000, guid: 56d5bcfd06021bc46abe65f9deac8f09, type: 2}
+  - {fileID: 11400000, guid: 061269cbc157bbb43a55ed8a44f1fbff, type: 2}

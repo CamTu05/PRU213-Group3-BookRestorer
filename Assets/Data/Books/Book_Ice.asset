@@ -16,4 +16,5 @@ MonoBehaviour:
   bookName: The Ice Book
   description: Let's go to find Elsa...
   coverImage: {fileID: -8179522610657087616, guid: d48affc572f454c4f9fd6099345f57b0, type: 3}
-  levels: []
+  levels:
+  - {fileID: 11400000, guid: 2e4728fb0ff22be4dabedbae838ca971, type: 2}

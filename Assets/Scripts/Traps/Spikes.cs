@@ -8,7 +8,7 @@ public class Spikes : MonoBehaviour
     [SerializeField] private AudioClip trapAudioSource;
 
     [Header("Cấu Hình Hậu Quả")]
-    public int damage = 3;
+    public int damage = 1;
     public float knockbackForceX = 2f;
     public float knockbackForceY = 5f;
     public float flashDuration = 1.5f;

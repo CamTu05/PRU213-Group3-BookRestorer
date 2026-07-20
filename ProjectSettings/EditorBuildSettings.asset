@@ -32,5 +32,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Build Scene/Jungle_Level_02.unity
     guid: 88a357a68b22dc6438e02b9fbe8cc80a
+  - enabled: 1
+    path: Assets/Scenes/Castle_Level_02.unity
+    guid: 3fd65bad2de728a45acca666a5573deb
+  - enabled: 1
+    path: Assets/Scenes/Castle_Level_01.unity
+    guid: 472efc121f84a3b40a14a8ea605effd4
+  - enabled: 1
+    path: Assets/Scenes/Build Scene/Snow_Level_01.unity
+    guid: e8a23f8fd911b8341a24b409893747bf
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
