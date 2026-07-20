@@ -56,7 +56,7 @@ public class Enemy3 : Enemy
         anim.SetBool("Is_Attack", true);            // Bật bool cho Animator
 
         lastAttackTime = Time.time;
-        
+        //PlayAttackSound();
     }
 
     // Hàm này được gọi bởi Animation Event ở frame cuối của animation Attack

@@ -122,7 +122,7 @@ public class Enemy1 : Enemy
 
         anim.SetBool("Is_Attack", true);
         lastAttackTime = Time.time;
-        
+        //PlayAttackSound();
     }
 
     public void EndAttack()
